@@ -51,14 +51,14 @@ const AppTabNavigator = createMaterialTopTabNavigator({
       style: {
         ...Platform.select({
           android:{
-            backgroundColor:'white',
+            backgroundColor:'#bae8e8',
           }
         })
       },
       tabStyle:{height:52},
       pressColor : '#e3f6f5',
-      activeTintColor: '#272343',
-      inactiveTintColor: '#bae8e8',
+      activeTintColor: '#e3f6f5',
+      inactiveTintColor: '#272343',
       upperCaseLabel:false,
       showLabel:false,
       showIcon:true,

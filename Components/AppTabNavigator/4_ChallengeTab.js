@@ -4,14 +4,14 @@ import { View, Text, StyleSheet } from 'react-native';
 export default class ChallengeTab extends Component {
     render() {
         return (
-            <View style={style.container}>
+            <View style={styles.container}>
                 <Text>ChallengeTab</Text>
             </View>
         );
     }
 }
  
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
