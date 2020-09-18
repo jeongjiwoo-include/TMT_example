@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import ShowComponent from '../ShowComponent';
-import { Container, Content, Icon } from 'native-base';
+import { Container, Content, Icon, Left, Right } from 'native-base';
 
 class CircleButton extends Component{
     render(){
@@ -30,7 +29,7 @@ class Title extends Component {
     render(){
         return(
             <View style={styles.title}>
-                <Text style={{fontSize:35, color:'black'}}>TITLE</Text>
+                <Text style={{fontSize:35, color:'black'}}>내 정보</Text>
             </View>
         )
     }
@@ -40,7 +39,7 @@ class SubTitle extends Component{
     render(){
         return(
             <View style={styles.subtitle}>
-                <Text sytle={{fontSize:20, color:'black'}}>SubTitle</Text>
+                <Text sytle={{fontSize:20, color:'black'}}></Text>
             </View>
         )
     }
@@ -49,11 +48,11 @@ class SubTitle extends Component{
 class MainCom extends Component{
     render(){
         return(
-            <ScrollView style={styles.main}>
-                <ShowComponent/>
-                <ShowComponent/>
-                <ShowComponent/>
-            </ScrollView>
+            <View style={styles.main}>
+                <TouchableOpacity style={{flex: 1,justifyContent: 'center'}}>
+                    <Text>프로필 편집</Text>
+                </TouchableOpacity>
+            </View>
         )
     }
 }
@@ -67,12 +66,22 @@ class Box extends Component{
 }
 
 
-export default class HomeTab extends Component {
+export default class ProfileTab extends Component {
     render() {
         return (
             <View style={styles.rootcontainer}>
                 <View style={styles.container}>
-                    <Profile/>
+                    <View style={styles.profile}>
+                        <TouchableOpacity>
+                            <Image
+                              style={styles.button}
+                              source={require('../Image/example.png')}
+                            />
+                         </TouchableOpacity>
+                             <TouchableOpacity onPress={()=>this.props.navigation.navigate('홈')}>
+                                 <Text>X</Text>
+                             </TouchableOpacity>
+                    </View>
                     <Title/>
                     <SubTitle/>
                     <Content>
@@ -121,7 +130,7 @@ const styles = StyleSheet.create({
         width: 70, 
         height: 70, 
         borderRadius: 100 / 2,
-        backgroundColor:'grey',
+        backgroundColor:'#bae8e8',
     },
     box :{
         flex : 0.3,

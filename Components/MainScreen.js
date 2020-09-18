@@ -2,14 +2,27 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text, Image, Platform } from 'react-native';
 import { Icon } from 'native-base';
 
-import {createAppContainer} from 'react-navigation';
+import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createBottomTabNavigator, createMaterialTopTabNavigator} from 'react-navigation-tabs';
+import { createStackNavigator } from 'react-navigation-stack';
 
-import HomeTab from './AppTabNavigator/1_HomeTab'
-import ActivityTab from './AppTabNavigator/2_ActivityTab'
-import ExerciseTab from './AppTabNavigator/3_ExerciseTab'
-import ChallengeTab from './AppTabNavigator/4_ChallengeTab'
-import AlertTab from './AppTabNavigator/5_AlertTab'
+import HomeTab from './1_HomeTab/1_HomeTab'
+import ActivityTab from './2_ActivityTab/2_ActivityTab'
+import ExerciseTab from './3_ExerciseTab/3_ExerciseTab'
+import ChallengeTab from './4_ChallengeTab/4_ChallengeTab'
+import AlertTab from './5_AlertTab/5_AlertTab'
+import ProfileTab from './6_ProfileTab/6_ProfileTab'
+
+
+const Profile_Navigator =createStackNavigator(
+  {
+    내정보:{screen:ProfileTab},
+  },
+  {
+    headerMode:'none'
+  },
+)
+
 
 const AppTabNavigator = createMaterialTopTabNavigator({
   홈: {screen:HomeTab,
@@ -17,7 +30,7 @@ const AppTabNavigator = createMaterialTopTabNavigator({
       tabBarIcon: ({tintColor}) => (
           <Icon name='home' style={{color: tintColor, fontSize: 25, }} />
       )
-   }},
+   }, ProfileTab},
   활동: {screen:ActivityTab,
     navigationOptions: {
       tabBarIcon: ({tintColor}) => (
@@ -41,7 +54,7 @@ const AppTabNavigator = createMaterialTopTabNavigator({
       tabBarIcon: ({tintColor}) => (
         <Icon name='ios-notifications' style={{color: tintColor, fontSize: 25, }} />
     )
-    }}
+    }},
 },
 {
     animationEnabled: true,
@@ -65,7 +78,16 @@ const AppTabNavigator = createMaterialTopTabNavigator({
     }
 });
 
-const AppTabCotainer = createAppContainer(AppTabNavigator);
+
+const Navi = createSwitchNavigator({
+  AppTabNavigator,
+  Profile_Navigator,
+},
+{
+  initialRouteName: 'AppTabNavigator',
+},);
+
+const AppTabCotainer = createAppContainer(Navi);
 
 export default class MainScreen extends Component {
    
