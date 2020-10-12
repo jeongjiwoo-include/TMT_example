@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { Container, Content, Icon, Left, Right } from 'native-base';
+import Show from './ShowComponent/Show'
+import { Container, Content, Icon } from 'native-base';
 
 class CircleButton extends Component{
     render(){
@@ -19,7 +20,7 @@ class Profile extends Component {
     render(){
         return(
             <View style={styles.profile}>
-                <CircleButton/>
+                <CircleButton />
             </View>
         )
     }
@@ -29,30 +30,20 @@ class Title extends Component {
     render(){
         return(
             <View style={styles.title}>
-                <Text style={{fontSize:35, color:'black'}}>내 정보</Text>
+                <Text style={{fontSize:35, color:'black'}}>운동</Text>
             </View>
         )
     }
 }
 
-class SubTitle extends Component{
-    render(){
-        return(
-            <View style={styles.subtitle}>
-                <Text sytle={{fontSize:20, color:'black'}}></Text>
-            </View>
-        )
-    }
-}
+
 
 class MainCom extends Component{
     render(){
         return(
-            <View style={styles.main}>
-                <TouchableOpacity style={{flex: 1,justifyContent: 'center'}}>
-                    <Text>프로필 편집</Text>
-                </TouchableOpacity>
-            </View>
+            <ScrollView style={styles.main}>
+                <Show/>
+            </ScrollView>
         )
     }
 }
@@ -66,24 +57,20 @@ class Box extends Component{
 }
 
 
-export default class ProfileTab extends Component {
+export default class ExerciseTab extends Component {
     render() {
         return (
             <View style={styles.rootcontainer}>
                 <View style={styles.container}>
                     <View style={styles.profile}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('내정보')}>
                             <Image
-                              style={styles.button}
-                              source={require('../Image/example.png')}
-                            />
-                         </TouchableOpacity>
-                             <TouchableOpacity onPress={()=>this.props.navigation.navigate('홈')}>
-                                 <Text>X</Text>
-                             </TouchableOpacity>
+                            style={styles.button}
+                            source={require('../Image/example.png')}
+                        />
+                        </TouchableOpacity>
                     </View>
                     <Title/>
-                    <SubTitle/>
                     <Content>
                         <MainCom/>                    
                     </Content>

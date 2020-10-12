@@ -6,55 +6,111 @@ import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createBottomTabNavigator, createMaterialTopTabNavigator} from 'react-navigation-tabs';
 import { createStackNavigator } from 'react-navigation-stack';
 
-import HomeTab from './1_HomeTab/1_HomeTab'
-import ActivityTab from './2_ActivityTab/2_ActivityTab'
-import ExerciseTab from './3_ExerciseTab/3_ExerciseTab'
-import ChallengeTab from './4_ChallengeTab/4_ChallengeTab'
-import AlertTab from './5_AlertTab/5_AlertTab'
-import ProfileTab from './6_ProfileTab/6_ProfileTab'
+import B0_HomeTab from './B_HomeTab/0_HomeTab'
+
+import C0_ActivityTab from './C_ActivityTab/0_ActivityTab'
+import C1_ActivityResult from './C_ActivityTab/1_AcitivityResult'
+
+import D0_ExerciseTab from './D_ExerciseTab/0_ExerciseTab'
+
+import E0_ChallengeTab from './E_ChallengeTab/0_ChallengeTab'
+
+import F0_ProfileTab from './F_ProfileTab/0_ProfileTab'
+import F1_ProfileEdit from './F_ProfileTab/1_ProfileEdit'
+
+import A0_LoginTab from './A_Login/0_LoginTab'
+import A1_SignupTab from './A_Login/1_SignupTab'
 
 
-const Profile_Navigator =createStackNavigator(
+const A_Navigator = createStackNavigator(
   {
-    내정보:{screen:ProfileTab},
+    A0_LoginTab,
+    A1_SignupTab,
   },
   {
-    headerMode:'none'
+    headerMode: 'none',
   },
-)
+); 
 
-
-const AppTabNavigator = createMaterialTopTabNavigator({
-  홈: {screen:HomeTab,
+const B_Navigator = createStackNavigator(
+  {
+    홈: {screen : B0_HomeTab},
+  },
+  {
     navigationOptions: {
       tabBarIcon: ({tintColor}) => (
           <Icon name='home' style={{color: tintColor, fontSize: 25, }} />
       )
-   }, ProfileTab},
-  활동: {screen:ActivityTab,
+   },
+   headerMode: 'none',
+  },
+);
+
+const C_Navigator = createStackNavigator(
+  {
+    활동: {screen: C0_ActivityTab},
+    C1_ActivityResult,
+  },
+  {
     navigationOptions: {
       tabBarIcon: ({tintColor}) => (
         <Icon name='ios-pulse' style={{color: tintColor, fontSize: 25, }} />
     ) //name = 'ios-stats'/'ios-clipboard'
-    }},
-  운동하기: {screen:ExerciseTab,
+    },
+    headerMode: 'none',
+  },
+);
+
+const D_Navigator = createStackNavigator(
+  {
+    운동하기: {screen:D0_ExerciseTab},
+  },
+  {
     navigationOptions: {
       tabBarIcon: ({tintColor}) => (
         <Icon name='ios-scan-sharp' style={{color: tintColor, fontSize: 25, }} />
     ) // 'ios-walk'
-    }},
-  챌린지: {screen:ChallengeTab,
+    },
+    headerMode: 'none',
+  },
+);
+
+const E_Navigator = createStackNavigator(
+  {
+    챌린지 : {screen:E0_ChallengeTab},
+  },
+  {
     navigationOptions: {
       tabBarIcon: ({tintColor}) => (
         <Icon name='ios-medal' style={{color: tintColor, fontSize: 25, }} />
     )
-    }},
-  알림: {screen:AlertTab,
+    },
+    headerMode: 'none',
+  },
+);
+
+const F_Navigator = createStackNavigator(
+  {
+    내정보:{screen:F0_ProfileTab},
+    F1_ProfileEdit,
+  },
+  {
     navigationOptions: {
       tabBarIcon: ({tintColor}) => (
-        <Icon name='ios-notifications' style={{color: tintColor, fontSize: 25, }} />
-    )
-    }},
+        <Icon name='person' style={{color: tintColor, fontSize: 25, }} />
+    ),
+    },
+    headerMode: 'none',
+  },
+);
+
+
+const AppTabNavigator = createMaterialTopTabNavigator({
+  홈: B_Navigator,
+  활동: C_Navigator,
+  운동하기: D_Navigator,
+  챌린지: E_Navigator,
+  내정보: F_Navigator,
 },
 {
     animationEnabled: true,
@@ -81,7 +137,7 @@ const AppTabNavigator = createMaterialTopTabNavigator({
 
 const Navi = createSwitchNavigator({
   AppTabNavigator,
-  Profile_Navigator,
+  A_Navigator,
 },
 {
   initialRouteName: 'AppTabNavigator',

@@ -4,7 +4,7 @@ import { Card, CardItem, Thumbnail, Body, Left, Right, Button, Icon } from 'nati
  
 
 
-export default class Challenge_ShowCompnent extends Component{
+export default class Challenge_ShowComponent extends Component{
     render(){
       return (
         <Card>

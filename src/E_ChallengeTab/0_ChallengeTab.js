@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import Challenge from './ShowComponent/Challenge_ShowComponent';
-import Stats from './ShowComponent/Stats_ShowComponent';
+import Make from './ShowComponent/MakeChallenge'
+import Show from './ShowComponent/Show'
 import { Container, Content, Icon } from 'native-base';
 
 class CircleButton extends Component{
@@ -31,29 +31,19 @@ class Title extends Component {
     render(){
         return(
             <View style={styles.title}>
-                <Text style={{fontSize:35, color:'black'}}>TITLE</Text>
+                <Text style={{fontSize:35, color:'black'}}>챌린지</Text>
             </View>
         )
     }
 }
 
-class SubTitle extends Component{
-    render(){
-        return(
-            <View style={styles.subtitle}>
-                <Text sytle={{fontSize:20, color:'black'}}>SubTitle</Text>
-            </View>
-        )
-    }
-}
 
 class MainCom extends Component{
     render(){
         return(
             <ScrollView style={styles.main}>
-                <Challenge/>
-                <Challenge/>
-                <Stats/>
+                <Make/>
+                <Show/>
             </ScrollView>
         )
     }
@@ -68,7 +58,7 @@ class Box extends Component{
 }
 
 
-export default class HomeTab extends Component {
+export default class ChallengeTab extends Component {
     render() {
         return (
             <View style={styles.rootcontainer}>
@@ -82,7 +72,6 @@ export default class HomeTab extends Component {
                         </TouchableOpacity>
                     </View>
                     <Title/>
-                    <SubTitle/>
                     <Content>
                         <MainCom/>                    
                     </Content>
