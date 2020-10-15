@@ -8,7 +8,7 @@ export default class ShowComponent extends Component{
     render(){
       return (
         <Card>
-          <CardItem button onPress={()=> alert('navigate to ActivityResult')}>
+          <CardItem button onPress={()=> this.props.navigation.navigate('C1_ActivityResult')}>
               <Left>
                 <Text>날짜</Text>
                 </Left>

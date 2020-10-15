@@ -116,7 +116,56 @@ export default class ProfileTab extends Component {
                          </TouchableOpacity>
                     </View>
                     <Content>
-                        <MainCom/>                    
+                    <View style={styles.main}>
+                        <Card>
+                            <CardItem button onPress={()=> alert('프로필 사진 변경하기')} style={{height:50}}>
+                                    <Text style={{fontSize:20}}>프로필 사진 변경하기</Text>
+                            </CardItem>
+                            <CardItem button onPress={()=> alert('닉네임 변경하기')} style={{height:50}}>
+                                    <Text style={{fontSize:20}}>닉네임 변경하기</Text>
+                            </CardItem>
+                            <CardItem>
+                                <Left>
+                                    <Text></Text>
+                                    </Left>
+                            </CardItem>
+                            <CardItem >
+                                <Left>
+                                    <Text></Text>
+                                    </Left>
+                            </CardItem>
+                            <CardItem >
+                                <Left>
+                                    <Text></Text>
+                                    </Left>
+                            </CardItem>
+                            <CardItem >
+                                <Left>
+                                    <Text></Text>
+                                    </Left>
+                            </CardItem>
+                            <CardItem >
+                                <Left>
+                                    <Text></Text>
+                                    </Left>
+                            </CardItem>
+                            <CardItem >
+                                <Left>
+                                    <Text></Text>
+                                    </Left>
+                            </CardItem>
+                            <CardItem >
+                                <Left>
+                                    <Text></Text>
+                                    </Left>
+                            </CardItem>
+                            <CardItem >
+                                <Left>
+                                    <Text></Text>
+                                    </Left>
+                            </CardItem>
+                        </Card>
+                     </View>           
                     </Content>
                 </View>
             </View>

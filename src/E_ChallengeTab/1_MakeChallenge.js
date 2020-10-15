@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import Make from './ShowComponent/MakeChallenge'
 import Show from './ShowComponent/Show'
-import { Card, CardItem, Thumbnail, Body, Left, Right, Button, Icon, Content } from 'native-base';
+import { Card, CardItem, Thumbnail, Body, Left, Right, Button, Icon, Content, Form, Input, Item, Label } from 'native-base';
 
 class CircleButton extends Component{
     render(){
@@ -31,7 +31,7 @@ class Title extends Component {
     render(){
         return(
             <View style={styles.title}>
-                <Text style={{fontSize:35, color:'black'}}>챌린지</Text>
+                <Text style={{fontSize:35, color:'black'}}>챌린지 만들기</Text>
             </View>
         )
     }
@@ -43,9 +43,18 @@ class MainCom extends Component{
         return(
             <ScrollView style={styles.main}>
                 <Card>
-                    <CardItem button onPress={()=> this.props.navigation.navigate('E1_MakeChallenge')}>
+                    <CardItem button onPress={()=> alert('make challenge')}>
                         <Left>
-                            <Text>챌린지 만들기</Text>
+                            <Text>이름 설정</Text>
+                            </Left>
+                            <Right>
+                            </Right>
+                    </CardItem>
+                </Card>
+                <Card>
+                    <CardItem button onPress={()=> alert('make challenge')}>
+                        <Left>
+                            <Text>운동 선택</Text>
                             </Left>
                             <Right>
                                 <Icon name="add-circle-outline"/>
@@ -53,23 +62,28 @@ class MainCom extends Component{
                     </CardItem>
                 </Card>
                 <Card>
-                    <CardItem button onPress={()=> alert('30일스쿼트챌린지')}>
+                    <CardItem button onPress={()=> alert('make challenge')}>
                         <Left>
-                            <Text>30일 스쿼트 챌린지</Text>
+                            <Text>기간 설정</Text>
                             </Left>
                             <Right>
-                                <Icon name="arrow-forward"/>
-                            </Right>
-                    </CardItem>
-                    <CardItem button onPress={()=> alert('매일하는 7분 운동')}>
-                        <Left>
-                            <Text>매일하는 7분 운동</Text>
-                            </Left>
-                            <Right>
-                                <Icon name="arrow-forward"/>
+                                <Icon name="add-circle-outline"/>
                             </Right>
                     </CardItem>
                 </Card>
+                <Card>
+                    <CardItem button onPress={()=> alert('make challenge')}>
+                        <Left>
+                            <Text>친구 추가</Text>
+                            </Left>
+                            <Right>
+                                <Icon name="add-circle-outline"/>
+                            </Right>
+                    </CardItem>
+                </Card>
+                <Button>
+                    <Text>저장  </Text>
+                </Button>
             </ScrollView>
         )
     }
@@ -85,6 +99,14 @@ class Box extends Component{
 
 
 export default class ChallengeTab extends Component {
+    state ={
+        c_name:'',
+        c_exercise:null,
+        c_due:null,
+        c_friend:null,
+    }
+
+
     render() {
         return (
             <View style={styles.rootcontainer}>
@@ -99,37 +121,56 @@ export default class ChallengeTab extends Component {
                     </View>
                     <Title/>
                     <Content>
-                        <ScrollView style={styles.main}>
+                        <View style={styles.main}>
                             <Card>
-                                <CardItem button onPress={()=>this.props.navigation.navigate('E1_MakeChallenge')} style={{height:100}}>
+                                    <Form>
+                                        <Item stackedLabel>
+                                            <Label style={{fontSize:20}}>이름 설정</Label>
+                                            <Input value={this.state.c_name} onChangeText={val=>this.setState({c_name:val})}/>
+                                        </Item>
+                                    </Form>
+                                
+                                <CardItem button onPress={()=> alert('make challenge')} style={{height:100}}>
                                     <Left>
-                                        <Text style={{fontSize:20}}>챌린지 만들기</Text>
+                                        <Text style={{fontSize:20}}>운동 선택</Text>
+                                        </Left>
+                                        <Right>
+                                            <Icon name="add-circle-outline"/>
+                                        </Right>
+                                </CardItem>
+                                <CardItem button onPress={()=> alert('make challenge')} style={{height:100}}>
+                                    <Left>
+                                        <Text style={{fontSize:20}}>기간 설정</Text>
+                                        </Left>
+                                        <Right>
+                                            <Icon name="add-circle-outline"/>
+                                        </Right>
+                                </CardItem>
+                                <CardItem button onPress={()=> alert('make challenge')} style={{height:100}}>
+                                    <Left>
+                                        <Text style={{fontSize:20}}>친구 추가</Text>
                                         </Left>
                                         <Right>
                                             <Icon name="add-circle-outline"/>
                                         </Right>
                                 </CardItem>
                             </Card>
-                            <Card>
-                                <CardItem button onPress={()=> alert('30일스쿼트챌린지')} style={{height:100}}>
-                                    <Left>
-                                        <Text style={{fontSize:20}}>30일 스쿼트 챌린지</Text>
-                                        </Left>
-                                        <Right>
-                                            <Icon name="arrow-forward"/>
-                                        </Right>
-                                </CardItem>
-                                <CardItem button onPress={()=> alert('매일하는 7분 운동')} style={{height:100}}>
-                                    <Left>
-                                        <Text style={{fontSize:20}}>매일하는 7분 운동</Text>
-                                        </Left>
-                                        <Right>
-                                            <Icon name="arrow-forward"/>
-                                        </Right>
-                                </CardItem>
-                            </Card>
-                        </ScrollView>                  
+                        </View>
                     </Content>
+                    <View style={{height:50, alignItems:'flex-end', marginBottom:10}}>
+                        <TouchableOpacity 
+                                style={{width: 370,
+                                height: 50,
+                                borderRadius: 10,
+                                backgroundColor:'#272343',
+                                justifyContent:'center',  
+                                alignItems:'flex-end', 
+                                marginBottom:20,
+                                alignItems:'center'}} 
+                                onPress={()=> alert(this.state.c_name)}>
+                                    <Text style={{color: 'white', fontSize:19, fontStyle:'normal',}}>저장</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </View>
         );
@@ -167,6 +208,7 @@ const styles = StyleSheet.create({
     },
     main :{
         backgroundColor: 'white',
+
         
     },
     button :{
@@ -180,5 +222,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         borderWidth: 0.3,
         borderRadius: 10,
+        borderColor: '#bae8e8'
     }
 });

@@ -123,19 +123,19 @@ export default class ProfileTab extends Component {
                     <Content>
                     <View style={styles.main}>
           <Card>
-          <CardItem button onPress={()=> this.props.navigation.navigate('F1_ProfileEdit')}>
+          <CardItem button onPress={()=> this.props.navigation.navigate('F1_ProfileEdit')} style={{height:50}}>
               <Left>
-                <Text>프로필 편집</Text>
+                <Text style={{fontSize:20}}>프로필 편집</Text>
                 </Left>
           </CardItem>
-          <CardItem button onPress={()=> alert('친구편집')}>
+          <CardItem button onPress={()=> alert('친구편집')} style={{height:50}}>
               <Left>
-                <Text>친구 편집</Text>
+                <Text style={{fontSize:20}}>친구 편집</Text>
                 </Left>
           </CardItem>
-          <CardItem button onPress={()=> alert('설정')}>
+          <CardItem button onPress={()=> alert('설정')} style={{height:50}}>
               <Left>
-                <Text>설정</Text>
+                <Text style={{fontSize:20}}>설정</Text>
                 </Left>
           </CardItem>
           <CardItem >

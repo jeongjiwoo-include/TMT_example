@@ -24,7 +24,7 @@ export default class ShowComponent extends Component{
                     <Icon name="arrow-forward"/>
                 </Right>
           </CardItem>
-          </Card>
+        </Card>
       );
     }
   }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import Show from './ShowComponent/Show'
-import { Container, Content, Icon } from 'native-base';
+//import Show from './ShowComponent/Show'
+import { Card, CardItem, Thumbnail, Body, Left, Right, Button, Content, Icon } from 'native-base';
 
 class CircleButton extends Component{
     render(){
@@ -42,7 +42,40 @@ class MainCom extends Component{
     render(){
         return(
             <ScrollView style={styles.main}>
-                <Show/>
+                <Card>
+                    <CardItem button onPress={()=> alert('운동1')}>
+                        <Left>
+                            <Text>스쿼트</Text>
+                            </Left>
+                            <Right>
+                                <Icon name="arrow-forward"/>
+                            </Right>
+                    </CardItem>
+                    <CardItem button onPress={()=> alert('운동2')}>
+                        <Left>
+                            <Text>프론트런지</Text>
+                            </Left>
+                            <Right>
+                                <Icon name="arrow-forward"/>
+                            </Right>
+                    </CardItem>
+                    <CardItem button onPress={()=> alert('운동3')}>
+                        <Left>
+                            <Text>사이드런지</Text>
+                            </Left>
+                            <Right>
+                                <Icon name="arrow-forward"/>
+                            </Right>
+                    </CardItem>
+                    <CardItem button onPress={()=> alert('운동4')}>
+                        <Left>
+                            <Text>플랭크</Text>
+                            </Left>
+                            <Right>
+                                <Icon name="arrow-forward"/>
+                            </Right>
+                    </CardItem>
+                </Card>
             </ScrollView>
         )
     }
@@ -72,7 +105,42 @@ export default class ExerciseTab extends Component {
                     </View>
                     <Title/>
                     <Content>
-                        <MainCom/>                    
+                    <ScrollView style={styles.main}>
+                <Card>
+                    <CardItem button onPress={()=>this.props.navigation.navigate('D0_1_Squat')} style={{height:100}}>
+                        <Left>
+                            <Text style={{fontSize:20}}>스쿼트</Text>
+                            </Left>
+                            <Right>
+                                <Icon name="arrow-forward"/>
+                            </Right>
+                    </CardItem>
+                    <CardItem button onPress={()=> this.props.navigation.navigate('D0_2_FrontLunge')} style={{height:100}}>
+                        <Left>
+                            <Text style={{fontSize:20}}>프론트런지</Text>
+                            </Left>
+                            <Right>
+                                <Icon name="arrow-forward"/>
+                            </Right>
+                    </CardItem>
+                    <CardItem button onPress={()=> this.props.navigation.navigate('D0_3_SideLunge')} style={{height:100}}>
+                        <Left>
+                            <Text style={{fontSize:20}}>사이드런지</Text>
+                            </Left>
+                            <Right>
+                                <Icon name="arrow-forward"/>
+                            </Right>
+                    </CardItem>
+                    <CardItem button onPress={()=>this.props.navigation.navigate('D0_4_Plank')} style={{height:100}}>
+                        <Left>
+                            <Text style={{fontSize:20}}>플랭크</Text>
+                            </Left>
+                            <Right>
+                                <Icon name="arrow-forward"/>
+                            </Right>
+                    </CardItem>
+                </Card>
+            </ScrollView>                    
                     </Content>
                 </View>
             </View>

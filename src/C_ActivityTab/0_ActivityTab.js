@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import Show from './ShowComponent/Show.js';
-import { Container, Content, Icon } from 'native-base';
+//import Show from './ShowComponent/Show.js';
+import { Card, CardItem, Thumbnail, Body, Left, Right, Button, Icon, Content } from 'native-base';
+import { withNavigation } from 'react-navigation';
+
+function navigate(des){
+    
+    this.props.navigation.navigate(des);
+
+}
 
 class CircleButton extends Component{
     render(){
@@ -53,6 +60,44 @@ class MainCom extends Component{
     }
 }
 
+class Show extends Component{
+    render(){
+      return (
+        <Card>
+          <CardItem button onPress={()=> console.log(this.props.navigation)}>
+              <Left>
+                <Text>날짜</Text>
+                </Left>
+                <Right>
+                    <Icon name="arrow-forward"/>
+                </Right>
+          </CardItem>
+          <CardItem>
+              <Body>
+                <Text>
+                  운동기록1
+                </Text>
+              </Body>
+            </CardItem>
+            <CardItem>
+              <Body>
+                <Text>
+                  운동기록2
+                </Text>
+              </Body>
+            </CardItem>
+            <CardItem>
+              <Body>
+                <Text>
+                  운동기록3
+                </Text>
+              </Body>
+            </CardItem>
+          </Card>
+      );
+    }
+  }
+
 class Box extends Component{
     render(){
         return(
@@ -77,7 +122,101 @@ export default class ActivityTab extends Component {
                     </View>
                     <Title/>
                     <Content>
-                        <MainCom/>                    
+                        <ScrollView style={styles.main}>
+                            <Card>
+                                <CardItem button onPress={()=> {this.props.navigation.navigate('C1_ActivityResult'); console.log(this.props.navigation)}}>
+                                    <Left>
+                                        <Text>날짜</Text>
+                                        </Left>
+                                        <Right>
+                                            <Icon name="arrow-forward"/>
+                                        </Right>
+                                </CardItem>
+                                <CardItem>
+                                    <Body>
+                                        <Text>
+                                        운동기록1
+                                        </Text>
+                                    </Body>
+                                    </CardItem>
+                                    <CardItem>
+                                    <Body>
+                                        <Text>
+                                        운동기록2
+                                        </Text>
+                                    </Body>
+                                    </CardItem>
+                                    <CardItem>
+                                    <Body>
+                                        <Text>
+                                        운동기록3
+                                        </Text>
+                                    </Body>
+                                    </CardItem>
+                                </Card>
+                                <Card>
+                                <CardItem button onPress={()=> {this.props.navigation.navigate('C1_ActivityResult'); console.log(this.props.navigation)}}>
+                                    <Left>
+                                        <Text>날짜</Text>
+                                        </Left>
+                                        <Right>
+                                            <Icon name="arrow-forward"/>
+                                        </Right>
+                                </CardItem>
+                                <CardItem>
+                                    <Body>
+                                        <Text>
+                                        운동기록1
+                                        </Text>
+                                    </Body>
+                                    </CardItem>
+                                    <CardItem>
+                                    <Body>
+                                        <Text>
+                                        운동기록2
+                                        </Text>
+                                    </Body>
+                                    </CardItem>
+                                    <CardItem>
+                                    <Body>
+                                        <Text>
+                                        운동기록3
+                                        </Text>
+                                    </Body>
+                                    </CardItem>
+                                </Card>
+                                <Card>
+                                <CardItem button onPress={()=> {this.props.navigation.navigate('C1_ActivityResult'); console.log(this.props.navigation)}}>
+                                    <Left>
+                                        <Text>날짜</Text>
+                                        </Left>
+                                        <Right>
+                                            <Icon name="arrow-forward"/>
+                                        </Right>
+                                </CardItem>
+                                <CardItem>
+                                    <Body>
+                                        <Text>
+                                        운동기록1
+                                        </Text>
+                                    </Body>
+                                    </CardItem>
+                                    <CardItem>
+                                    <Body>
+                                        <Text>
+                                        운동기록2
+                                        </Text>
+                                    </Body>
+                                    </CardItem>
+                                    <CardItem>
+                                    <Body>
+                                        <Text>
+                                        운동기록3
+                                        </Text>
+                                    </Body>
+                                    </CardItem>
+                                </Card>
+                        </ScrollView>               
                     </Content>
                 </View>
             </View>
