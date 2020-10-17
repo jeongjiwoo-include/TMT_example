@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import Challenge from './ShowComponent/Challenge_ShowComponent';
 import Stats from './ShowComponent/Stats_ShowComponent';
-import { Container, Content, Icon } from 'native-base';
+import { Container, Header, Button, Icon, Fab, Content } from 'native-base';
 
 class CircleButton extends Component{
     render(){
@@ -60,6 +60,12 @@ class Box extends Component{
 
 
 export default class HomeTab extends Component {
+    constructor(props){
+        super(props)
+        this.state={
+            active: false
+        };
+    }
     render() {
         return (
             <View style={styles.rootcontainer}>
@@ -74,8 +80,21 @@ export default class HomeTab extends Component {
                     </View>
                     <Title/>
                     <Content>
-                        <MainCom/>                    
+                        <ScrollView style={styles.main}>
+                            <Challenge/>
+                            <Challenge/>
+                            <Stats/>
+                        </ScrollView>             
                     </Content>
+                    <Fab 
+                        active={this.state.active}
+                        direction="up"
+                        containerStyle={{ }}
+                        style={{ backgroundColor: '#bae8e8' }}
+                        position="bottomRight"
+                        onPress={() => this.props.navigation.navigate('알림')}>
+                        <Icon name="ios-alert"/>
+                    </Fab>
                 </View>
             </View>
         );

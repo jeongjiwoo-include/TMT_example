@@ -124,7 +124,7 @@ export default class ActivityTab extends Component {
                     <Content>
                         <ScrollView style={styles.main}>
                             <Card>
-                                <CardItem button onPress={()=> {this.props.navigation.navigate('C1_ActivityResult'); console.log(this.props.navigation)}}>
+                                <CardItem button onPress={()=> {this.props.navigation.navigate('C1_ActivityResult')}} style={{borderBottomColor:'black', borderBottomWidth:0.5}}>
                                     <Left>
                                         <Text>날짜</Text>
                                         </Left>
@@ -155,7 +155,7 @@ export default class ActivityTab extends Component {
                                     </CardItem>
                                 </Card>
                                 <Card>
-                                <CardItem button onPress={()=> {this.props.navigation.navigate('C1_ActivityResult'); console.log(this.props.navigation)}}>
+                                <CardItem button onPress={()=> {this.props.navigation.navigate('C1_ActivityResult')}} style={{borderBottomColor:'black', borderBottomWidth:0.5}}>
                                     <Left>
                                         <Text>날짜</Text>
                                         </Left>
@@ -186,7 +186,7 @@ export default class ActivityTab extends Component {
                                     </CardItem>
                                 </Card>
                                 <Card>
-                                <CardItem button onPress={()=> {this.props.navigation.navigate('C1_ActivityResult'); console.log(this.props.navigation)}}>
+                                <CardItem button onPress={()=> {this.props.navigation.navigate('C1_ActivityResult')}} style={{borderBottomColor:'black', borderBottomWidth:0.6}}>
                                     <Left>
                                         <Text>날짜</Text>
                                         </Left>

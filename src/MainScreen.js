@@ -26,6 +26,16 @@ import F1_ProfileEdit from './F_ProfileTab/1_ProfileEdit'
 import A0_LoginTab from './A_Login/0_LoginTab'
 import A1_SignupTab from './A_Login/1_SignupTab'
 
+import X0_Alert from './X_Alert/0_Alert'
+
+const X_Navigator = createStackNavigator(
+  {
+    알림: {screen: X0_Alert},
+  },
+  {
+    headerMode: 'none',
+  },
+);
 
 const A_Navigator = createStackNavigator(
   {
@@ -148,6 +158,7 @@ const AppTabNavigator = createMaterialTopTabNavigator({
 const Navi = createSwitchNavigator({
   AppTabNavigator,
   A_Navigator,
+  X_Navigator,
 },
 {
   initialRouteName: 'AppTabNavigator',

@@ -8,7 +8,7 @@ export default class Challenge_ShowComponent extends Component{
     render(){
       return (
         <Card>
-          <CardItem>
+          <CardItem style={{borderBottomColor:'black', borderBottomWidth:0.6}}>
             <Left>
               <Thumbnail source={require('../../Image/example.png')} />
               <Body>

@@ -59,7 +59,7 @@ export default class SignupTab extends Component {
                         </TextInput>
                     </View>
                     <View style={{height:50, alignItems:'flex-end'}}>
-                        <TouchableOpacity style={styles.button} onPress={()=> this.signCheck(this.state.id,this.state.pw,this.state.re_pw)}>
+                        <TouchableOpacity style={styles.button} onPress={()=> {this.signCheck(this.state.id,this.state.pw,this.state.re_pw); this.props.navigation.navigate('홈');}}>
                             <Text style={{color: 'white', fontSize:19, fontStyle:'normal',}}>가입하기</Text>
                         </TouchableOpacity>
                     </View>
