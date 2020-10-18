@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { Container, Content, Icon, Left, Right, Card, CardItem } from 'native-base';
+import { Container, Content, Icon, Left, Right, Card, CardItem, Input } from 'native-base';
+import Modal, { ModalContent, ModalTitle, ModalFooter, ModalButton } from 'react-native-modals';
 
 class CircleButton extends Component{
     render(){
@@ -103,6 +104,14 @@ class Box extends Component{
 
 
 export default class ProfileTab extends Component {
+    constructor(props){
+        super(props);
+        this.state ={
+            visible:false,
+            nickname:'',
+        }
+    }
+    
     render() {
         return (
             <View style={styles.rootcontainer}>
@@ -118,12 +127,35 @@ export default class ProfileTab extends Component {
                     <Content>
                     <View style={styles.main}>
                         <Card>
-                            <CardItem button onPress={()=> alert('프로필 사진 변경하기')} style={{height:50}}>
+                            <CardItem button onPress={()=> alert('프로필 사진 변경하기=>Image Picker사용하기')} style={{height:50}}>
                                     <Text style={{fontSize:20}}>프로필 사진 변경하기</Text>
                             </CardItem>
-                            <CardItem button onPress={()=> alert('닉네임 변경하기')} style={{height:50}}>
+                            <CardItem button onPress={()=> this.setState({visible:true})} style={{height:50}}>
                                     <Text style={{fontSize:20}}>닉네임 변경하기</Text>
                             </CardItem>
+                            <Modal visible={this.state.visible}
+                                               onTouchOutside={() => {this.setState({ visible: false });}}
+                                               >  
+                                            <ModalTitle
+                                            title="닉네임 변경"
+                                            align="left"
+                                            />
+                                            <ModalContent style={{ backgroundColor: '#fff', paddingTop: 24, width:200, height:150 }}>
+                                                <Text style={{borderStyle:'solid'}}>변경할 닉네임을 입력하세요.</Text>
+                                                <Input style={{borderBottomWidth:0.5, borderBottomColor:'black', height:12}} value={this.state.nickname} onChangeText={val=>this.setState({nickname:val})}/>
+                                            </ModalContent>
+                                            <ModalFooter>
+                                                <ModalButton
+                                                    text="변경"
+                                                    onPress={() => {
+                                                    this.setState({ visible: false });
+                                                    alert(this.state.nickname+'으로 변경되었습니다.');
+                                                    }
+                                                    }
+                                                    key="button-1"
+                                                />
+                                            </ModalFooter>
+                                        </Modal>
                             <CardItem>
                                 <Left>
                                     <Text></Text>

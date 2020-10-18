@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import Make from './ShowComponent/MakeChallenge'
-import Show from './ShowComponent/Show'
 import { Card, CardItem, Thumbnail, Body, Left, Right, Button, Icon, Content } from 'native-base';
 import ProgressBar from 'react-native-progress/Bar';
 
@@ -32,7 +30,7 @@ class Title extends Component {
     render(){
         return(
             <View style={styles.title}>
-                <Text style={{fontSize:35, color:'black'}}>챌린지</Text>
+                <Text style={{fontSize:35, color:'black'}}>30일 스쿼트 챌린지</Text>
             </View>
         )
     }
@@ -85,7 +83,7 @@ class Box extends Component{
 }
 
 
-export default class ChallengeTab extends Component {
+export default class ShowChallenge extends Component {
     render() {
         return (
             <View style={styles.rootcontainer}>
@@ -100,19 +98,9 @@ export default class ChallengeTab extends Component {
                     </View>
                     <Title/>
                     <Content>
-                        <ScrollView style={styles.main}>
+                        <View style={styles.main}>
                             <Card>
-                                <CardItem button onPress={()=>this.props.navigation.navigate('E1_MakeChallenge')} style={{height:100}}>
-                                    <Left>
-                                        <Text style={{fontSize:20}}>챌린지 만들기</Text>
-                                        </Left>
-                                        <Right>
-                                            <Icon name="add-circle-outline"/>
-                                        </Right>
-                                </CardItem>
-                            </Card>
-                            <Card>
-                                <CardItem button onPress={()=> this.props.navigation.navigate('E2_ShowChallenge')} style={{height:100}}>
+                                <CardItem button onPress={()=> alert('30일스쿼트챌린지')} style={{height:100}}>
                                     <Left>
                                         <Text style={{fontSize:20}}>30일 스쿼트 챌린지</Text>
                                         </Left>
@@ -131,27 +119,8 @@ export default class ChallengeTab extends Component {
                                 <CardItem style={{justifyContent:'center', borderBottomColor:'black', borderBottomWidth:0.5}}>
                                     <ProgressBar color={'#272343'} unfilledColor={'#bae8e8'} borderWidth={0} progress={0.3} width={300}/>
                                 </CardItem>
-                                <CardItem button onPress={()=> alert('매일하는 7분 운동')} style={{height:100}}>
-                                    <Left>
-                                        <Text style={{fontSize:20}}>매일하는 7분 운동</Text>
-                                        </Left>
-                                        <Right>
-                                            <Icon name="arrow-forward"/>
-                                        </Right>
-                                </CardItem>
-                                <CardItem style={{marginLeft:20,marginRight:20}}>
-                                    <Left>
-                                    <Text>70 / 100 Days</Text>
-                                    </Left>
-                                    <Right>
-                                    <Text>순위 : 1 / 48</Text>    
-                                    </Right>                                
-                                </CardItem>
-                                <CardItem style={{justifyContent:'center', borderBottomColor:'black', borderBottomWidth:0.5}}>
-                                    <ProgressBar color={'#272343'} unfilledColor={'#bae8e8'} borderWidth={0} progress={0.7} width={300}/>
-                                    </CardItem>
                             </Card>
-                        </ScrollView>                  
+                        </View>                  
                     </Content>
                 </View>
             </View>

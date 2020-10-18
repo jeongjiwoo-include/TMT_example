@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { Container, Content, Icon, Left, Right, Card, CardItem } from 'native-base';
+import { Container, Content, Icon, Left, Right, Card, CardItem, Input, Label } from 'native-base';
+import Modal, { ModalContent, ModalTitle, ModalFooter, ModalButton } from 'react-native-modals';
 
 class CircleButton extends Component{
     render(){
@@ -29,7 +30,7 @@ class Title extends Component {
     render(){
         return(
             <View style={styles.title}>
-                <Text style={{fontSize:35, color:'black'}}>내 정보</Text>
+                <Text style={{fontSize:35, color:'black'}}>설정</Text>
             </View>
         )
     }
@@ -106,7 +107,19 @@ class Box extends Component{
 }
 
 
-export default class ProfileTab extends Component {
+export default class Setting extends Component {
+    constructor(props){
+        super(props);
+        this.state={
+            id:'',
+            pwd:'',
+            re_pwd:'',
+            nickname:'',
+            visible:false,
+            
+            pwd_secure:true,
+        }
+    }
     render() {
         return (
             <View style={styles.rootcontainer}>
@@ -123,19 +136,49 @@ export default class ProfileTab extends Component {
                     <Content>
                     <View style={styles.main}>
           <Card>
-          <CardItem button onPress={()=> this.props.navigation.navigate('F1_ProfileEdit')} style={{height:50}}>
+          <CardItem button onPress={()=> this.setState({visible:true})} style={{height:50}}>
               <Left>
-                <Text style={{fontSize:20}}>프로필 편집</Text>
+                <Text style={{fontSize:20}}>비밀번호 변경하기</Text>
                 </Left>
           </CardItem>
-          <CardItem button onPress={()=> this.props.navigation.navigate('F2_FriendEdit')} style={{height:50}}>
+          <Modal visible={this.state.visible}
+                onTouchOutside={() => {this.setState({ visible: false });}}
+                    >  
+                    <ModalTitle
+                    title="비밀번호 변경"
+                    align="left"
+                    />
+                <ModalContent style={{ backgroundColor: '#fff', paddingTop: 24, width:200, height:300 }}>
+                    <Text style={{borderStyle:'solid'}}>변경할 비밀번호를 입력하세요.</Text>
+                    <Label style={{paddingTop:24}}>비밀번호</Label>     
+                    <Input secureTextEntry={true} style={{borderBottomWidth:0.5, borderBottomColor:'black', height:12}} value={this.state.pwd} onChangeText={val=>this.setState({pwd:val})}/>
+                    <Label style={{paddingTop:24}}>비밀번호 확인</Label>
+                    <Input secrueTextEntry={true} style={{borderBottomWidth:0.5, borderBottomColor:'black', height:12}} value={this.state.re_pwd} onChangeText={val=>this.setState({re_pwd:val})}/>
+                </ModalContent>
+                <ModalFooter>
+                <ModalButton
+                text="변경"
+                onPress={() => {
+                    if(this.state.pwd==this.state.re_pwd){
+                        this.setState({ visible: false });
+                        alert('비밀번호가 변경되었습니다.');}
+                    else{
+                        alert('비밀번호와 비밀번호 확인이 맞지 않습니다.');
+                    }
+                }
+                }
+                key="button-1"
+                />
+                </ModalFooter>
+            </Modal>
+          <CardItem button onPress={()=> alert('개인정보')} style={{height:50}}>
               <Left>
-                <Text style={{fontSize:20}}>친구 편집</Text>
+                <Text style={{fontSize:20}}>개인 정보</Text>
                 </Left>
           </CardItem>
-          <CardItem button onPress={()=> this.props.navigation.navigate('F3_Setting')} style={{height:50}}>
+          <CardItem>
               <Left>
-                <Text style={{fontSize:20}}>설정</Text>
+                <Text ></Text>
                 </Left>
           </CardItem>
           <CardItem >

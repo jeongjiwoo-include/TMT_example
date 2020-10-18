@@ -19,9 +19,12 @@ import D0_4_Plank from './D_ExerciseTab/D_Exercise/D0_4_Plank'
 
 import E0_ChallengeTab from './E_ChallengeTab/0_ChallengeTab'
 import E1_MakeChallenge from './E_ChallengeTab/1_MakeChallenge'
+import E2_ShowChallenge from './E_ChallengeTab/2_ShowChallenge'
 
 import F0_ProfileTab from './F_ProfileTab/0_ProfileTab'
 import F1_ProfileEdit from './F_ProfileTab/1_ProfileEdit'
+import F2_FriendEdit from './F_ProfileTab/2_FriendEdit'
+import F3_Setting from './F_ProfileTab/3_Setting'
 
 import A0_LoginTab from './A_Login/0_LoginTab'
 import A1_SignupTab from './A_Login/1_SignupTab'
@@ -98,6 +101,7 @@ const E_Navigator = createStackNavigator(
   {
     챌린지 : {screen:E0_ChallengeTab},
     E1_MakeChallenge,
+    E2_ShowChallenge,
   },
   {
     navigationOptions: {
@@ -113,6 +117,8 @@ const F_Navigator = createStackNavigator(
   {
     내정보:{screen:F0_ProfileTab},
     F1_ProfileEdit,
+    F2_FriendEdit,
+    F3_Setting,
   },
   {
     navigationOptions: {
