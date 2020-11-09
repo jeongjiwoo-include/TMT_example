@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Card, CardItem, Thumbnail, Body, Left, Right, Button, Content, Icon } from 'native-base';
+import {RNCamera} from 'react-native-camera';
 
 class CircleButton extends Component{
     render(){
@@ -41,7 +42,11 @@ class MainCom extends Component{
     render(){
         return(
             <ScrollView style={styles.main}>
-                <Text>Squat Page</Text>
+            <RNCamera
+                style={{width: 200, height: 200}}
+                type={RNCamera.Constants.Type.back}
+                captureAudio={false}
+            />
             </ScrollView>
         )
     }

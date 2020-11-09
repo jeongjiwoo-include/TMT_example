@@ -128,7 +128,9 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    defaultConfig {
+     defaultConfig {
+        missingDimensionStrategy 'react-native-camera', 'general'
+
         applicationId "com.tmt_example"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
