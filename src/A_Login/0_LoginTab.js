@@ -3,6 +3,8 @@ import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity, TextInput 
 import { Container, Content, Icon } from 'native-base';
 import { back } from 'react-native/Libraries/Animated/src/Easing';
 
+var Data=null;
+
 const login = async (user) => {
     try {
         let response = await fetch(
@@ -73,8 +75,15 @@ export default  class LoginTab extends Component {
                         >
                         </TextInput>
                         <TouchableOpacity style={styles.button} onPress={()=> {
-                            login(this.state).then((json)=> {if(json.hasOwnProperty('data')){this.props.navigation.navigate('홈'); console.log(json.data.users.name,"로그인");}
-                            else{alert('잘못된 ID 혹은 PW입니다. \n다시 확인하세요.');}})                            
+                            login(this.state).then((json)=> {
+                                if(json.hasOwnProperty('data')){
+                                    Data=json; 
+                                    this.props.navigation.navigate('홈',{data:Data}); 
+                                    console.log(json.data.users.name,"로그인");
+                                    console.log(Data,"데이터");
+                                }
+                                else{alert('잘못된 ID 혹은 PW입니다. \n다시 확인하세요.');}
+                            })                            
                            }}
                                 >
                             <Text style={{color: 'white', fontSize:21, fontStyle:'normal',}}>SIGN IN</Text>

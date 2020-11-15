@@ -41,64 +41,6 @@ class Title extends Component {
 }
 
 
-class MainCom extends Component{
-    render(){
-        return(
-            <ScrollView style={styles.main}>
-                <Card>
-                    <CardItem button onPress={()=> alert('make challenge')}>
-                        <Left>
-                            <Text>이름 설정</Text>
-                            </Left>
-                            <Right>
-                            </Right>
-                    </CardItem>
-                </Card>
-                <Card>
-                    <CardItem button onPress={()=> alert('make challenge')}>
-                        <Left>
-                            <Text>운동 선택</Text>
-                            </Left>
-                            <Right>
-                                <Icon name="add-circle-outline"/>
-                            </Right>
-                    </CardItem>
-                </Card>
-                <Card>
-                    <CardItem button onPress={()=> alert('make challenge')}>
-                        <Left>
-                            <Text>기간 설정</Text>
-                            </Left>
-                            <Right>
-                                <Icon name="add-circle-outline"/>
-                            </Right>
-                    </CardItem>
-                </Card>
-                <Card>
-                    <CardItem button onPress={()=> alert('make challenge')}>
-                        <Left>
-                            <Text>친구 추가</Text>
-                            </Left>
-                            <Right>
-                                <Icon name="add-circle-outline"/>
-                            </Right>
-                    </CardItem>
-                </Card>
-                <Button>
-                    <Text>저장  </Text>
-                </Button>
-            </ScrollView>
-        )
-    }
-}
-
-class Box extends Component{
-    render(){
-        return(
-            <View style ={ styles.box}></View>
-        )
-    }
-}
 
 
 export default class ChallengeTab extends Component {
@@ -148,7 +90,7 @@ export default class ChallengeTab extends Component {
                         <TouchableOpacity onPress={()=>this.props.navigation.navigate('내정보')}>
                             <Image
                             style={styles.button}
-                            source={require('../Image/example.png')}
+                            source={require('../Image/default_profile.png')}
                         />
                         </TouchableOpacity>
                     </View>

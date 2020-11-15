@@ -4,6 +4,8 @@ import Challenge from './ShowComponent/Challenge_ShowComponent';
 import Stats from './ShowComponent/Stats_ShowComponent';
 import { Container, Header, Button, Icon, Fab, Content } from 'native-base';
 
+global.DB = null;
+
 class CircleButton extends Component{
     render(){
         return(
@@ -60,21 +62,26 @@ class Box extends Component{
 
 
 export default class HomeTab extends Component {
+   
     constructor(props){
         super(props)
         this.state={
             active: false
         };
     }
+    componentDidMount(){
+        const Data = this.props.navigation.getParam('data');
+        DB=Data;
+    }
     render() {
         return (
             <View style={styles.rootcontainer}>
                 <View style={styles.container}>
                     <View style={styles.profile}>
-                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('내정보')}>
+                        <TouchableOpacity onPress={()=>{console.log(DB); this.props.navigation.navigate('내정보')}}>
                             <Image
                             style={styles.button}
-                            source={require('../Image/example.png')}
+                            source={require('../Image/default_profile.png')}
                         />
                         </TouchableOpacity>
                     </View>

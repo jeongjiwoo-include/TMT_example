@@ -65,7 +65,7 @@ export default class D0_3_SideLunge extends Component {
                         <TouchableOpacity onPress={()=>this.props.navigation.navigate('내정보')}>
                             <Image
                             style={styles.button}
-                            source={require('../../Image/example.png')}
+                            source={require('../../Image/default_profile.png')}
                         />
                         </TouchableOpacity>
                     </View>
@@ -74,6 +74,21 @@ export default class D0_3_SideLunge extends Component {
                         <MainCom/>
                     </Content>
                 </View>
+                <View style={{height:50, alignItems:'center', marginBottom:10}}>
+                        <TouchableOpacity 
+                                style={{width: 370,
+                                height: 50,
+                                borderRadius: 10,
+                                backgroundColor:'#272343',
+                                justifyContent:'center',  
+                                alignItems:'flex-end', 
+                                marginBottom:20,
+                                alignItems:'center'}} 
+                                onPress={()=> {this.props.navigation.navigate('D1_ExerciseResult')}
+                                    }>
+                                <Text style={{color: 'white', fontSize:19, fontStyle:'normal',}}>완료</Text>
+                        </TouchableOpacity>
+                    </View>
             </View>
         );
     }

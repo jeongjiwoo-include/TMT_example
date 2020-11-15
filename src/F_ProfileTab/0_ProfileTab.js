@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Container, Content, Icon, Left, Right, Card, CardItem } from 'native-base';
 
+
 class CircleButton extends Component{
     render(){
         return(
@@ -36,75 +37,6 @@ class Title extends Component {
 }
 
 
-class MainCom extends Component{
-    render(){
-        return(
-            <View style={styles.main}>
-          <Card>
-          <CardItem button onPress={()=> this.props.navigation.navigate('F1_EditProfile')}>
-              <Left>
-                <Text>프로필 편집</Text>
-                </Left>
-          </CardItem>
-          <CardItem button onPress={()=> alert('친구편집')}>
-              <Left>
-                <Text>친구 편집</Text>
-                </Left>
-          </CardItem>
-          <CardItem button onPress={()=> alert('설정')}>
-              <Left>
-                <Text>설정</Text>
-                </Left>
-          </CardItem>
-          <CardItem >
-              <Left>
-                <Text></Text>
-                </Left>
-          </CardItem>
-          <CardItem >
-              <Left>
-                <Text></Text>
-                </Left>
-          </CardItem>
-          <CardItem >
-              <Left>
-                <Text></Text>
-                </Left>
-          </CardItem>
-          <CardItem >
-              <Left>
-                <Text></Text>
-                </Left>
-          </CardItem>
-          <CardItem >
-              <Left>
-                <Text></Text>
-                </Left>
-          </CardItem>
-          <CardItem >
-              <Left>
-                <Text></Text>
-                </Left>
-          </CardItem>
-          <CardItem >
-              <Left>
-                <Text></Text>
-                </Left>
-          </CardItem>
-          </Card>
-            </View>
-        )
-    }
-}
-
-class Box extends Component{
-    render(){
-        return(
-            <View style ={ styles.box}></View>
-        )
-    }
-}
-
 
 export default class ProfileTab extends Component {
     render() {
@@ -115,7 +47,7 @@ export default class ProfileTab extends Component {
                         <TouchableOpacity>
                             <Image
                               style={styles.button}
-                              source={require('../Image/example.png')}
+                              source={require('../Image/default_profile.png')}
                             />
                          </TouchableOpacity>
                     </View>
@@ -123,7 +55,7 @@ export default class ProfileTab extends Component {
                     <Content>
                     <View style={styles.main}>
           <Card>
-          <CardItem button onPress={()=> this.props.navigation.navigate('F1_ProfileEdit')} style={{height:50}}>
+          <CardItem button onPress={()=> {console.log(DB);this.props.navigation.navigate('F1_ProfileEdit',{data:DB})}} style={{height:50}}>
               <Left>
                 <Text style={{fontSize:20}}>프로필 편집</Text>
                 </Left>
@@ -133,7 +65,7 @@ export default class ProfileTab extends Component {
                 <Text style={{fontSize:20}}>친구 편집</Text>
                 </Left>
           </CardItem>
-          <CardItem button onPress={()=> this.props.navigation.navigate('F3_Setting')} style={{height:50}}>
+          <CardItem button onPress={()=> this.props.navigation.navigate('F3_Setting',{data:DB})} style={{height:50}}>
               <Left>
                 <Text style={{fontSize:20}}>설정</Text>
                 </Left>

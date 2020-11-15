@@ -2,6 +2,17 @@ import React, { Component } from 'react';
 import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity, TextInput } from 'react-native';
 import { Container, Content, Icon } from 'native-base';
 
+const idDoubleCheck = async (id) => {
+    try {
+        let response = await fetch('https://savemeht.ml/join/doublecheck/' + id);
+        let json = await response.json();
+        console.log(json);
+        return json;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 const join = async (user) => {
     try {
         let response = await fetch(
@@ -45,7 +56,7 @@ export default class SignupTab extends Component {
         public:0,
     }
     handleID=(text)=>{
-        this.setState({id:text})
+        this.setState({id:text});
     }
     handlePW=(text)=>{
         this.setState({pw:text})
@@ -62,7 +73,7 @@ export default class SignupTab extends Component {
     handlePHONE=(text)=>{
         this.setState({phone_number:text})
     }
-    handleAGE=(text)=>{
+    handleAGE=(text)=>{ //생년월일을 받아서 계산하게
         this.setState({age:text})
     }
     handleHEIGHT=(text)=>{
@@ -171,7 +182,19 @@ export default class SignupTab extends Component {
                     <View style={{height:50, alignItems:'flex-end'}}>
                         <TouchableOpacity style={styles.button} onPress={()=> {this.signCheck(
                             this.state.id,this.state.pw,this.state.re_pw, this.state.name, this.state.email, this.state.phone_number, this.state.age, this.state.height, this.state.weight
-                            ); join(this.state); this.props.navigation.navigate('홈');}}>
+                            ); 
+                            idDoubleCheck(this.state)
+                            .then((json)=>{
+                                if(json.state==0){
+                                    alert('중복된 ID입니다.\n다른 ID를 입력하세요.');
+                                }
+                                else{
+                                    join(this.state).then(alert('회원가입 완료!\n로그인하세요.')).then(this.props.navigation.navigate('A0_LoginTab'));
+                                }
+                            })
+                            
+                            }
+                            }>
                             <Text style={{color: 'white', fontSize:19, fontStyle:'normal',}}>가입하기</Text>
                         </TouchableOpacity>
                     </View>

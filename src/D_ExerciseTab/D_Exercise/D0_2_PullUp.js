@@ -8,7 +8,7 @@ class CircleButton extends Component{
             <TouchableOpacity>
             <Image
               style={styles.button}
-              source={require('../../Image/example.png')}
+              source={require('../../Image/default_profile.png')}
             />
           </TouchableOpacity>
         )
@@ -29,7 +29,7 @@ class Title extends Component {
     render(){
         return(
             <View style={styles.title}>
-                <Text style={{fontSize:35, color:'black'}}>프론트런지</Text>
+                <Text style={{fontSize:35, color:'black'}}>풀업</Text>
             </View>
         )
     }
@@ -41,7 +41,7 @@ class MainCom extends Component{
     render(){
         return(
             <ScrollView style={styles.main}>
-                <Text>FrontLunge Page</Text>
+                <Text>PullUp Page</Text>
             </ScrollView>
         )
     }
@@ -56,7 +56,7 @@ class Box extends Component{
 }
 
 
-export default class D0_2_FrontLunge extends Component {
+export default class D0_2_PullUp extends Component {
     render() {
         return (
             <View style={styles.rootcontainer}>
@@ -65,7 +65,7 @@ export default class D0_2_FrontLunge extends Component {
                         <TouchableOpacity onPress={()=>this.props.navigation.navigate('내정보')}>
                             <Image
                             style={styles.button}
-                            source={require('../../Image/example.png')}
+                            source={require('../../Image/default_profile.png')}
                         />
                         </TouchableOpacity>
                     </View>
@@ -74,6 +74,21 @@ export default class D0_2_FrontLunge extends Component {
                         <MainCom/>
                     </Content>
                 </View>
+                <View style={{height:50, alignItems:'center', marginBottom:10}}>
+                        <TouchableOpacity 
+                                style={{width: 370,
+                                height: 50,
+                                borderRadius: 10,
+                                backgroundColor:'#272343',
+                                justifyContent:'center',  
+                                alignItems:'flex-end', 
+                                marginBottom:20,
+                                alignItems:'center'}} 
+                                onPress={()=> {this.props.navigation.navigate('D1_ExerciseResult')}
+                                    }>
+                                <Text style={{color: 'white', fontSize:19, fontStyle:'normal',}}>완료</Text>
+                        </TouchableOpacity>
+                    </View>
             </View>
         );
     }

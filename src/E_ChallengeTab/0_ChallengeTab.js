@@ -44,7 +44,7 @@ class MainCom extends Component{
         return(
             <ScrollView style={styles.main}>
                 <Card>
-                    <CardItem button onPress={()=> this.props.navigation.navigate('E1_MakeChallenge')}>
+                    <CardItem button onPress={()=>{console.log(DB); this.props.navigation.navigate('E1_MakeChallenge');}}>
                         <Left>
                             <Text>챌린지 만들기</Text>
                             </Left>
@@ -94,7 +94,7 @@ export default class ChallengeTab extends Component {
                         <TouchableOpacity onPress={()=>this.props.navigation.navigate('내정보')}>
                             <Image
                             style={styles.button}
-                            source={require('../Image/example.png')}
+                            source={require('../Image/default_profile.png')}
                         />
                         </TouchableOpacity>
                     </View>

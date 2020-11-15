@@ -2,6 +2,28 @@ import React, { Component } from 'react';
 import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Container, Content, Icon, Left, Right, Card, CardItem, Input } from 'native-base';
 import Modal, { ModalContent, ModalTitle, ModalFooter, ModalButton } from 'react-native-modals';
+import { roundToNearestPixel } from 'react-native/Libraries/Utilities/PixelRatio';
+
+const updateInfo = async (uID, changedName) => {
+    try {
+        let response = await fetch(
+            `https://savemeht.ml/user/${uID}`, {
+                method: 'PUT',
+                headers: {
+                    Accept: 'appplication/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: changedName,
+                })
+            });
+        let json = await response.json();
+        console.log(json);
+        return json;
+    } catch (error) {
+        console.error(error);
+    }
+}
 
 class CircleButton extends Component{
     render(){
@@ -9,7 +31,7 @@ class CircleButton extends Component{
             <TouchableOpacity>
             <Image
               style={styles.button}
-              source={require('../Image/example.png')}
+              source={require('../Image/default_profile.png')}
             />
           </TouchableOpacity>
         )
@@ -37,63 +59,6 @@ class Title extends Component {
 }
 
 
-class MainCom extends Component{
-    render(){
-        return(
-            <View style={styles.main}>
-          <Card>
-          <CardItem button onPress={()=> alert('프로필 사진 변경하기')}>
-                <Text>프로필 사진 변경하기</Text>
-          </CardItem>
-          <CardItem button onPress={()=> alert('닉네임 변경하기')}>
-                <Text>닉네임 변경하기</Text>
-          </CardItem>
-          <CardItem>
-              <Left>
-                <Text></Text>
-                </Left>
-          </CardItem>
-          <CardItem >
-              <Left>
-                <Text></Text>
-                </Left>
-          </CardItem>
-          <CardItem >
-              <Left>
-                <Text></Text>
-                </Left>
-          </CardItem>
-          <CardItem >
-              <Left>
-                <Text></Text>
-                </Left>
-          </CardItem>
-          <CardItem >
-              <Left>
-                <Text></Text>
-                </Left>
-          </CardItem>
-          <CardItem >
-              <Left>
-                <Text></Text>
-                </Left>
-          </CardItem>
-          <CardItem >
-              <Left>
-                <Text></Text>
-                </Left>
-          </CardItem>
-          <CardItem >
-              <Left>
-                <Text></Text>
-                </Left>
-          </CardItem>
-          </Card>
-            </View>
-        )
-    }
-}
-
 class Box extends Component{
     render(){
         return(
@@ -108,11 +73,17 @@ export default class ProfileTab extends Component {
         super(props);
         this.state ={
             visible:false,
-            nickname:'',
+            name:'',
+            uID:-1,
         }
+    }
+    componentDidMount(){
+        const Data = this.props.navigation.getParam('data');
+        this.setState({name:Data.data.users.name, uID:Data.data.users.uID});
     }
     
     render() {
+        
         return (
             <View style={styles.rootcontainer}>
                 <View style={styles.container}>
@@ -120,36 +91,38 @@ export default class ProfileTab extends Component {
                         <TouchableOpacity>
                             <Image
                               style={styles.button}
-                              source={require('../Image/example.png')}
+                              source={require('../Image/default_profile.png')}
                             />
                          </TouchableOpacity>
                     </View>
                     <Content>
                     <View style={styles.main}>
                         <Card>
-                            <CardItem button onPress={()=> alert('프로필 사진 변경하기=>Image Picker사용하기')} style={{height:50}}>
+                            <CardItem button onPress={()=> {alert('프로필 사진 변경하기=>Image Picker사용하기'); console.log(Data);}} style={{height:50}}>
                                     <Text style={{fontSize:20}}>프로필 사진 변경하기</Text>
                             </CardItem>
-                            <CardItem button onPress={()=> this.setState({visible:true})} style={{height:50}}>
-                                    <Text style={{fontSize:20}}>닉네임 변경하기</Text>
+                            <CardItem button onPress={()=> {console.log(this.state.name, '/',this.state.uID);this.setState({visible:true});}} style={{height:50}}>
+                                    <Text style={{fontSize:20}}>이름 변경하기</Text>
                             </CardItem>
                             <Modal visible={this.state.visible}
                                                onTouchOutside={() => {this.setState({ visible: false });}}
                                                >  
                                             <ModalTitle
-                                            title="닉네임 변경"
+                                            title="이름 변경"
                                             align="left"
                                             />
                                             <ModalContent style={{ backgroundColor: '#fff', paddingTop: 24, width:200, height:150 }}>
-                                                <Text style={{borderStyle:'solid'}}>변경할 닉네임을 입력하세요.</Text>
-                                                <Input style={{borderBottomWidth:0.5, borderBottomColor:'black', height:12}} value={this.state.nickname} onChangeText={val=>this.setState({nickname:val})}/>
+                                                <Text style={{borderStyle:'solid'}}>변경할 이름을 입력하세요.</Text>
+                                                <Input style={{borderBottomWidth:0.5, borderBottomColor:'black', height:12}} value={this.state.name} onChangeText={val=>this.setState({name:val})}/>
                                             </ModalContent>
                                             <ModalFooter>
                                                 <ModalButton
                                                     text="변경"
                                                     onPress={() => {
                                                     this.setState({ visible: false });
-                                                    alert(this.state.nickname+'으로 변경되었습니다.');
+                                                    updateInfo(this.state.uID, this.state.name);
+                                                    alert(this.state.name+'으로 변경되었습니다.');
+                                                    console.log(this.state.name+'으로 변경되었습니다.');
                                                     }
                                                     }
                                                     key="button-1"

@@ -13,9 +13,10 @@ import C1_ActivityResult from './C_ActivityTab/1_AcitivityResult'
 
 import D0_ExerciseTab from './D_ExerciseTab/0_ExerciseTab'
 import D0_1_Squat from './D_ExerciseTab/D_Exercise/D0_1_Squat'
-import D0_2_FrontLunge from './D_ExerciseTab/D_Exercise/D0_2_FrontLunge'
+import D0_2_PullUp from './D_ExerciseTab/D_Exercise/D0_2_PullUp'
 import D0_3_SideLunge from './D_ExerciseTab/D_Exercise/D0_3_SideLunge'
 import D0_4_Plank from './D_ExerciseTab/D_Exercise/D0_4_Plank'
+import D1_ExerciseResult from './D_ExerciseTab/1_ExerciseResultTab'
 
 import E0_ChallengeTab from './E_ChallengeTab/0_ChallengeTab'
 import E1_MakeChallenge from './E_ChallengeTab/1_MakeChallenge'
@@ -52,7 +53,7 @@ const A_Navigator = createStackNavigator(
 
 const B_Navigator = createStackNavigator(
   {
-    홈: {screen : B0_HomeTab},
+    홈: {screen : B0_HomeTab, params:{}},
   },
   {
     navigationOptions: {
@@ -66,7 +67,7 @@ const B_Navigator = createStackNavigator(
 
 const C_Navigator = createStackNavigator(
   {
-    활동: {screen: C0_ActivityTab},
+    활동: {screen: C0_ActivityTab, params:{}},
     C1_ActivityResult,
   },
   {
@@ -81,11 +82,12 @@ const C_Navigator = createStackNavigator(
 
 const D_Navigator = createStackNavigator(
   {
-    운동하기: {screen:D0_ExerciseTab},
+    운동하기: {screen:D0_ExerciseTab, params:{}},
     D0_1_Squat,
-    D0_2_FrontLunge,
+    D0_2_PullUp,
     D0_3_SideLunge,
     D0_4_Plank,
+    D1_ExerciseResult,
   },
   {
     navigationOptions: {
@@ -99,7 +101,7 @@ const D_Navigator = createStackNavigator(
 
 const E_Navigator = createStackNavigator(
   {
-    챌린지 : {screen:E0_ChallengeTab},
+    챌린지 : {screen:E0_ChallengeTab, params:{}},
     E1_MakeChallenge,
     E2_ShowChallenge,
   },
@@ -115,7 +117,7 @@ const E_Navigator = createStackNavigator(
 
 const F_Navigator = createStackNavigator(
   {
-    내정보:{screen:F0_ProfileTab},
+    내정보:{screen:F0_ProfileTab, params:{}},
     F1_ProfileEdit,
     F2_FriendEdit,
     F3_Setting,

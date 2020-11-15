@@ -4,12 +4,6 @@ import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity } from 'rea
 import { Card, CardItem, Thumbnail, Body, Left, Right, Button, Icon, Content } from 'native-base';
 import { withNavigation } from 'react-navigation';
 
-function navigate(des){
-    
-    this.props.navigation.navigate(des);
-
-}
-
 class CircleButton extends Component{
     render(){
         return(
@@ -45,69 +39,15 @@ class Title extends Component {
 
 
 
-class MainCom extends Component{
-    render(){
-        return(
-            <ScrollView style={styles.main}>
-                <Show />
-                <Show/>
-                <Show/>
-                <Show/>
-                <Show/>
-                <Show/>
-            </ScrollView>
-        )
-    }
-}
-
-class Show extends Component{
-    render(){
-      return (
-        <Card>
-          <CardItem button onPress={()=> console.log(this.props.navigation)}>
-              <Left>
-                <Text>날짜</Text>
-                </Left>
-                <Right>
-                    <Icon name="arrow-forward"/>
-                </Right>
-          </CardItem>
-          <CardItem>
-              <Body>
-                <Text>
-                  운동기록1
-                </Text>
-              </Body>
-            </CardItem>
-            <CardItem>
-              <Body>
-                <Text>
-                  운동기록2
-                </Text>
-              </Body>
-            </CardItem>
-            <CardItem>
-              <Body>
-                <Text>
-                  운동기록3
-                </Text>
-              </Body>
-            </CardItem>
-          </Card>
-      );
-    }
-  }
-
-class Box extends Component{
-    render(){
-        return(
-            <View style ={ styles.box}></View>
-        )
-    }
-}
-
-
 export default class ActivityTab extends Component {
+    state={
+        uID:0,
+        eID:0,
+        cID:0,
+        perform_datetime:'',
+        count_per_set:'',
+    }
+    
     render() {
         return (
             <View style={styles.rootcontainer}>
@@ -116,7 +56,7 @@ export default class ActivityTab extends Component {
                         <TouchableOpacity onPress={()=>this.props.navigation.navigate('내정보')}>
                             <Image
                             style={styles.button}
-                            source={require('../Image/example.png')}
+                            source={require('../Image/default_profile.png')}
                         />
                         </TouchableOpacity>
                     </View>
@@ -124,7 +64,7 @@ export default class ActivityTab extends Component {
                     <Content>
                         <ScrollView style={styles.main}>
                             <Card>
-                                <CardItem button onPress={()=> {this.props.navigation.navigate('C1_ActivityResult')}} style={{borderBottomColor:'black', borderBottomWidth:0.5}}>
+                                <CardItem button onPress={()=> {console.log(DB.data.exercise_records); this.props.navigation.navigate('C1_ActivityResult');}} style={{borderBottomColor:'black', borderBottomWidth:0.5}}>
                                     <Left>
                                         <Text>날짜</Text>
                                         </Left>

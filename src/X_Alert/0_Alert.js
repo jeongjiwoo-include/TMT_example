@@ -87,7 +87,7 @@ export default class Alert extends Component {
                         <TouchableOpacity onPress={()=>this.props.navigation.navigate('내정보')}>
                             <Image
                             style={styles.button}
-                            source={require('../Image/example.png')}
+                            source={require('../Image/default_profile.png')}
                         />
                         </TouchableOpacity>
                     </View>
@@ -309,7 +309,7 @@ export default class Alert extends Component {
                         containerStyle={{ }}
                         style={{ backgroundColor: '#bae8e8', marginBottom:52.5 }}
                         position="bottomRight"
-                        onPress={() => this.props.navigation.navigate('홈')}>
+                        onPress={() => {console.log(DB); this.props.navigation.navigate('홈',{data:DB});}}>
                         <Icon name="ios-arrow-back"/>
                     </Fab>
                 </View>

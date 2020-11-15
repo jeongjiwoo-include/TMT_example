@@ -3,6 +3,28 @@ import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity } from 'rea
 import { Container, Content, Icon, Left, Right, Card, CardItem, Input, Label } from 'native-base';
 import Modal, { ModalContent, ModalTitle, ModalFooter, ModalButton } from 'react-native-modals';
 
+const updateInfo = async (uID, changedPW) => {
+    try {
+        let response = await fetch(
+            `https://savemeht.ml/user/${uID}`, {
+                method: 'PUT',
+                headers: {
+                    Accept: 'appplication/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    pw: changedPW,
+                })
+            });
+        let json = await response.json();
+        console.log(json);
+        return json;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+
 class CircleButton extends Component{
     render(){
         return(
@@ -111,14 +133,18 @@ export default class Setting extends Component {
     constructor(props){
         super(props);
         this.state={
-            id:'',
             pwd:'',
             re_pwd:'',
-            nickname:'',
+            name:'',
             visible:false,
-            
+            uID:-1,
+
             pwd_secure:true,
         }
+    }
+    componentDidMount(){
+        const Data = this.props.navigation.getParam('data');
+        this.setState({uID:Data.data.users.uID});
     }
     render() {
         return (
@@ -128,7 +154,7 @@ export default class Setting extends Component {
                         <TouchableOpacity>
                             <Image
                               style={styles.button}
-                              source={require('../Image/example.png')}
+                              source={require('../Image/default_profile.png')}
                             />
                          </TouchableOpacity>
                     </View>
@@ -161,7 +187,7 @@ export default class Setting extends Component {
                 onPress={() => {
                     if(this.state.pwd==this.state.re_pwd){
                         this.setState({ visible: false });
-                        alert('비밀번호가 변경되었습니다.');}
+                        updateInfo(this.state.uID,this.state.pwd).then(alert('비밀번호가 변경되었습니다.'))}
                     else{
                         alert('비밀번호와 비밀번호 확인이 맞지 않습니다.');
                     }

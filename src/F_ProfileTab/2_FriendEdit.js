@@ -8,7 +8,7 @@ class CircleButton extends Component{
             <TouchableOpacity>
             <Image
               style={styles.button}
-              source={require('../Image/example.png')}
+              source={require('../Image/default_profile.png')}
             />
           </TouchableOpacity>
         )
@@ -144,7 +144,7 @@ export default class FriendEdit extends Component {
                         <TouchableOpacity>
                             <Image
                               style={styles.button}
-                              source={require('../Image/example.png')}
+                              source={require('../Image/default_profile.png')}
                             />
                          </TouchableOpacity>
                     </View>

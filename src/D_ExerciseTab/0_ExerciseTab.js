@@ -99,7 +99,7 @@ export default class ExerciseTab extends Component {
                         <TouchableOpacity onPress={()=>this.props.navigation.navigate('내정보')}>
                             <Image
                             style={styles.button}
-                            source={require('../Image/example.png')}
+                            source={require('../Image/default_profile.png')}
                         />
                         </TouchableOpacity>
                     </View>
@@ -107,7 +107,7 @@ export default class ExerciseTab extends Component {
                     <Content>
                     <ScrollView style={styles.main}>
                 <Card>
-                    <CardItem button onPress={()=>this.props.navigation.navigate('D0_1_Squat')} style={{height:100}}>
+                    <CardItem button onPress={()=>{console.log(DB.data.exercises[0]); this.props.navigation.navigate('D0_1_Squat',{data:DB});}} style={{height:100}}>
                         <Left>
                             <Text style={{fontSize:20}}>스쿼트</Text>
                             </Left>
@@ -115,25 +115,17 @@ export default class ExerciseTab extends Component {
                                 <Icon name="arrow-forward"/>
                             </Right>
                     </CardItem>
-                    <CardItem button onPress={()=> this.props.navigation.navigate('D0_2_FrontLunge')} style={{height:100}}>
+                    <CardItem button onPress={()=> {console.log(DB.data.exercises[1]);this.props.navigation.navigate('D0_2_PullUp');}} style={{height:100}}>
                         <Left>
-                            <Text style={{fontSize:20}}>프론트런지</Text>
+                            <Text style={{fontSize:20}}>풀업</Text>
                             </Left>
                             <Right>
                                 <Icon name="arrow-forward"/>
                             </Right>
                     </CardItem>
-                    <CardItem button onPress={()=> this.props.navigation.navigate('D0_3_SideLunge')} style={{height:100}}>
+                    <CardItem button onPress={()=> {console.log(DB.data.exercises[2]);this.props.navigation.navigate('D0_3_SideLunge');}} style={{height:100}}>
                         <Left>
                             <Text style={{fontSize:20}}>사이드런지</Text>
-                            </Left>
-                            <Right>
-                                <Icon name="arrow-forward"/>
-                            </Right>
-                    </CardItem>
-                    <CardItem button onPress={()=>this.props.navigation.navigate('D0_4_Plank')} style={{height:100}}>
-                        <Left>
-                            <Text style={{fontSize:20}}>플랭크</Text>
                             </Left>
                             <Right>
                                 <Icon name="arrow-forward"/>
