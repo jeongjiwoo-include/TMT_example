@@ -5,10 +5,23 @@ import { back } from 'react-native/Libraries/Animated/src/Easing';
 
 var Data=null;
 
+const root = async () => {
+    try {
+        let response = await fetch(
+            'http://118.127.215.194:3000/'
+        );
+        let json = await response.json();
+        console.log(json);
+        return json;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 const login = async (user) => {
     try {
         let response = await fetch(
-            'https://savemeht.ml/login/', {
+            'http://118.127.215.194:3000/', {
                 method: 'POST',
                 headers: {
                     Accept: 'appplication/json',
@@ -75,7 +88,7 @@ export default  class LoginTab extends Component {
                         >
                         </TextInput>
                         <TouchableOpacity style={styles.button} onPress={()=> {
-                            login(this.state).then((json)=> {
+                            /*login(this.state).then((json)=> {
                                 if(json.hasOwnProperty('data')){
                                     Data=json; 
                                     this.props.navigation.navigate('홈',{data:Data}); 
@@ -83,7 +96,8 @@ export default  class LoginTab extends Component {
                                     console.log(Data,"데이터");
                                 }
                                 else{alert('잘못된 ID 혹은 PW입니다. \n다시 확인하세요.');}
-                            })                            
+                            }) */
+                            root();                           
                            }}
                                 >
                             <Text style={{color: 'white', fontSize:21, fontStyle:'normal',}}>SIGN IN</Text>

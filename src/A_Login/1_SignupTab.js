@@ -4,7 +4,7 @@ import { Container, Content, Icon } from 'native-base';
 
 const idDoubleCheck = async (id) => {
     try {
-        let response = await fetch('https://savemeht.ml/join/doublecheck/' + id);
+        let response = await fetch('http://118.127.215.194:3000/doublecheck/' + id);
         let json = await response.json();
         console.log(json);
         return json;
@@ -16,7 +16,7 @@ const idDoubleCheck = async (id) => {
 const join = async (user) => {
     try {
         let response = await fetch(
-            'https://savemeht.ml/join/', {
+            'http://118.127.215.194:3000/', {
                 method: 'POST',
                 headers: {
                     Accept: 'appplication/json',

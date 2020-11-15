@@ -7,7 +7,7 @@ import { roundToNearestPixel } from 'react-native/Libraries/Utilities/PixelRatio
 const updateInfo = async (uID, changedName) => {
     try {
         let response = await fetch(
-            `https://savemeht.ml/user/${uID}`, {
+            `http://118.127.215.194:3000/user/${uID}`, {
                 method: 'PUT',
                 headers: {
                     Accept: 'appplication/json',

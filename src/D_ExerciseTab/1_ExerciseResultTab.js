@@ -6,7 +6,7 @@ import ShowResult from './ShowComponent/ShowResult';
 const recordExercise = async (records) => {
     try {
         let response = await fetch(
-            'https://savemeht.ml/user/exercise_record', {
+            'http://118.127.215.194:3000/user/exercise_record', {
                 method: 'POST',
                 headers: {
                     Accept: 'appplication/json',
