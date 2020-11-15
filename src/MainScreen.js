@@ -167,7 +167,7 @@ const Navi = createSwitchNavigator({
   X_Navigator,
 },
 {
-  initialRouteName: 'AppTabNavigator',
+  initialRouteName: 'A_Navigator',
 },);
 
 const AppTabCotainer = createAppContainer(Navi);

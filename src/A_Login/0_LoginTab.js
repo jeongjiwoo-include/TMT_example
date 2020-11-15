@@ -49,7 +49,7 @@ export default class LoginTab extends Component {
                         onChangeText={this.handlePW}
                         >
                         </TextInput>
-                        <TouchableOpacity style={styles.button} onPress={()=> this.signIn(this.state.id, this.state.pw)}>
+                        <TouchableOpacity style={styles.button} onPress={()=> {this.signIn(this.state.id, this.state.pw); this.props.navigation.navigate('홈')}}>
                             <Text style={{color: 'white', fontSize:21, fontStyle:'normal',}}>SIGN IN</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
