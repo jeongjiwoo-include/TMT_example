@@ -3,12 +3,35 @@ import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity, TextInput 
 import { Container, Content, Icon } from 'native-base';
 import { back } from 'react-native/Libraries/Animated/src/Easing';
 
+const login = async (user) => {
+    try {
+        let response = await fetch(
+            'https://savemeht.ml/login/', {
+                method: 'POST',
+                headers: {
+                    Accept: 'appplication/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: user.id,
+                    pw: user.pw
+                })
+            });
+        let json = await response.json();
+        return json;
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+}
+//id가 존재하는지 유효성 검사 후 로그인
 
-export default class LoginTab extends Component {
+export default  class LoginTab extends Component {
     state ={
         id:'',
         pw:''
     }
+
     handleID=(text)=>{
         this.setState({id:text})
     }
@@ -49,11 +72,15 @@ export default class LoginTab extends Component {
                         onChangeText={this.handlePW}
                         >
                         </TextInput>
-                        <TouchableOpacity style={styles.button} onPress={()=> {this.signIn(this.state.id, this.state.pw); this.props.navigation.navigate('홈')}}>
+                        <TouchableOpacity style={styles.button} onPress={()=> {
+                            login(this.state).then((json)=> {if(json.hasOwnProperty('data')){this.props.navigation.navigate('홈'); console.log(json.data.users.name,"로그인");}
+                            else{alert('잘못된 ID 혹은 PW입니다. \n다시 확인하세요.');}})                            
+                           }}
+                                >
                             <Text style={{color: 'white', fontSize:21, fontStyle:'normal',}}>SIGN IN</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
-                        style={{width: 200, height: 50, alignItems:'center', marginTop:20}} onPress={()=>this.props.navigation.navigate('SignupTab')}
+                        style={{width: 200, height: 50, alignItems:'center', marginTop:20}} onPress={()=>this.props.navigation.navigate('A1_SignupTab')}
                         >
                             <Text style={{fontSize:25, textDecorationLine:'underline', fontWeight:'bold',}}>Create Account</Text>
                         </TouchableOpacity>
