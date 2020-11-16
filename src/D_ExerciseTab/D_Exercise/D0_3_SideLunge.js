@@ -57,6 +57,53 @@ class Box extends Component{
 
 
 export default class D0_3_SideLunge extends Component {
+    constructor(props){
+        super(props);
+        this.state={
+            count_per_set: 0,
+            uID:0,
+            eID:3,
+            name:'',
+            calorie_consume:100,
+            perform_datetime : '',
+
+        }
+    }
+
+    componentDidMount(){
+        const Data = this.props.navigation.getParam('data');
+        function getTimeStamp() {
+            var d = new Date();
+            var s =
+                leadingZeros(d.getFullYear(), 4) + '-' +
+                leadingZeros(d.getMonth() + 1, 2) + '-' +
+                leadingZeros(d.getDate(), 2)+ ' ' +
+                leadingZeros(d.getHours(),2)+':'+
+                leadingZeros(d.getMinutes(),2)+':'+
+                leadingZeros(d.getSeconds(),2);
+        
+            return s;
+        }
+        
+        function leadingZeros(n, digits) {
+        
+            var zero = '';
+            n = n.toString();
+        
+            if (n.length < digits) {
+                for (var i = 0; i < digits - n.length; i++)
+                    zero += '0';
+            }
+            return zero + n;
+        }
+        var now = getTimeStamp();
+
+        this.setState({
+            uID:DB.data.users.uID,
+            perform_datetime:now,
+            name:DB.data.exercises[2].name,
+        });
+    }
     render() {
         return (
             <View style={styles.rootcontainer}>

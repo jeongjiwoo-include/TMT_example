@@ -115,7 +115,7 @@ export default class ExerciseTab extends Component {
                                 <Icon name="arrow-forward"/>
                             </Right>
                     </CardItem>
-                    <CardItem button onPress={()=> {console.log(DB.data.exercises[1]);this.props.navigation.navigate('D0_2_PullUp');}} style={{height:100}}>
+                    <CardItem button onPress={()=> {console.log(DB.data.exercises[1]);this.props.navigation.navigate('D0_2_PullUp',{data:DB});}} style={{height:100}}>
                         <Left>
                             <Text style={{fontSize:20}}>풀업</Text>
                             </Left>
@@ -123,7 +123,7 @@ export default class ExerciseTab extends Component {
                                 <Icon name="arrow-forward"/>
                             </Right>
                     </CardItem>
-                    <CardItem button onPress={()=> {console.log(DB.data.exercises[2]);this.props.navigation.navigate('D0_3_SideLunge');}} style={{height:100}}>
+                    <CardItem button onPress={()=> {console.log(DB.data.exercises[2]);this.props.navigation.navigate('D0_3_SideLunge',{data:DB});}} style={{height:100}}>
                         <Left>
                             <Text style={{fontSize:20}}>사이드런지</Text>
                             </Left>
