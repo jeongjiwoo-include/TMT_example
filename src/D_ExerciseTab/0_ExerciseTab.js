@@ -3,28 +3,6 @@ import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity } from 'rea
 //import Show from './ShowComponent/Show'
 import { Card, CardItem, Thumbnail, Body, Left, Right, Button, Content, Icon } from 'native-base';
 
-class CircleButton extends Component{
-    render(){
-        return(
-            <TouchableOpacity>
-            <Image
-              style={styles.button}
-              source={require('../Image/example.png')}
-            />
-          </TouchableOpacity>
-        )
-    }
-}
-
-class Profile extends Component {
-    render(){
-        return(
-            <View style={styles.profile}>
-                <CircleButton />
-            </View>
-        )
-    }
-}
 
 class Title extends Component {
     render(){
@@ -32,59 +10,6 @@ class Title extends Component {
             <View style={styles.title}>
                 <Text style={{fontSize:35, color:'black'}}>운동</Text>
             </View>
-        )
-    }
-}
-
-
-
-class MainCom extends Component{
-    render(){
-        return(
-            <ScrollView style={styles.main}>
-                <Card>
-                    <CardItem button onPress={()=> alert('운동1')}>
-                        <Left>
-                            <Text>스쿼트</Text>
-                            </Left>
-                            <Right>
-                                <Icon name="arrow-forward"/>
-                            </Right>
-                    </CardItem>
-                    <CardItem button onPress={()=> alert('운동2')}>
-                        <Left>
-                            <Text>프론트런지</Text>
-                            </Left>
-                            <Right>
-                                <Icon name="arrow-forward"/>
-                            </Right>
-                    </CardItem>
-                    <CardItem button onPress={()=> alert('운동3')}>
-                        <Left>
-                            <Text>사이드런지</Text>
-                            </Left>
-                            <Right>
-                                <Icon name="arrow-forward"/>
-                            </Right>
-                    </CardItem>
-                    <CardItem button onPress={()=> alert('운동4')}>
-                        <Left>
-                            <Text>플랭크</Text>
-                            </Left>
-                            <Right>
-                                <Icon name="arrow-forward"/>
-                            </Right>
-                    </CardItem>
-                </Card>
-            </ScrollView>
-        )
-    }
-}
-
-class Box extends Component{
-    render(){
-        return(
-            <View style ={ styles.box}></View>
         )
     }
 }

@@ -3,6 +3,7 @@ import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity } from 'rea
 //import Show from './ShowComponent/Show.js';
 import { Card, CardItem, Thumbnail, Body, Left, Right, Button, Icon, Content } from 'native-base';
 import { withNavigation } from 'react-navigation';
+import * as Request from '../request';
 
 class CircleButton extends Component{
     render(){
@@ -47,7 +48,36 @@ export default class ActivityTab extends Component {
         perform_datetime:'',
         count_per_set:'',
     }
-    
+    /*result = {
+        date : {
+            day:'',
+            eID:0,
+            cID:0,
+            count_per_set:'',
+        }
+            
+    }*/
+    result = new Array();
+
+    componentDidMount(){
+        console.log(DB);
+        this.setState({uID:DB.data.users.uID})
+        this.addDateTime(); 
+        
+    }
+    addDateTime=()=>{
+        var res = DB.data.exercise_records;
+        console.log('ab',res)
+        for(let i = 0; i < res.length;i++){
+            var temp = res[i].perform_datetime.split('T');
+            this.result.push(temp[0]);
+            console.log(i, ': ', temp[0]);
+        }
+        console.log(this.result)
+    }
+ /*   datetimeFilter=(perform_datetime)=>{
+        const res = DB.data.exercise_records.perform_datetime.filter(x => )
+    }*/
     render() {
         return (
             <View style={styles.rootcontainer}>

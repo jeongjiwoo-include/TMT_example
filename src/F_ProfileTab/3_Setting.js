@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Container, Content, Icon, Left, Right, Card, CardItem, Input, Label } from 'native-base';
 import Modal, { ModalContent, ModalTitle, ModalFooter, ModalButton } from 'react-native-modals';
+import * as Request from '../request';
 
 const updateInfo = async (uID, changedPW) => {
     try {
@@ -25,29 +26,6 @@ const updateInfo = async (uID, changedPW) => {
 }
 
 
-class CircleButton extends Component{
-    render(){
-        return(
-            <TouchableOpacity>
-            <Image
-              style={styles.button}
-              source={require('../Image/example.png')}
-            />
-          </TouchableOpacity>
-        )
-    }
-}
-
-class Profile extends Component {
-    render(){
-        return(
-            <View style={styles.profile}>
-                <CircleButton/>
-            </View>
-        )
-    }
-}
-
 class Title extends Component {
     render(){
         return(
@@ -58,75 +36,6 @@ class Title extends Component {
     }
 }
 
-
-class MainCom extends Component{
-    render(){
-        return(
-            <View style={styles.main}>
-          <Card>
-          <CardItem button onPress={()=> this.props.navigation.navigate('F1_EditProfile')}>
-              <Left>
-                <Text>프로필 편집</Text>
-                </Left>
-          </CardItem>
-          <CardItem button onPress={()=> alert('친구편집')}>
-              <Left>
-                <Text>친구 편집</Text>
-                </Left>
-          </CardItem>
-          <CardItem button onPress={()=> alert('설정')}>
-              <Left>
-                <Text>설정</Text>
-                </Left>
-          </CardItem>
-          <CardItem >
-              <Left>
-                <Text></Text>
-                </Left>
-          </CardItem>
-          <CardItem >
-              <Left>
-                <Text></Text>
-                </Left>
-          </CardItem>
-          <CardItem >
-              <Left>
-                <Text></Text>
-                </Left>
-          </CardItem>
-          <CardItem >
-              <Left>
-                <Text></Text>
-                </Left>
-          </CardItem>
-          <CardItem >
-              <Left>
-                <Text></Text>
-                </Left>
-          </CardItem>
-          <CardItem >
-              <Left>
-                <Text></Text>
-                </Left>
-          </CardItem>
-          <CardItem >
-              <Left>
-                <Text></Text>
-                </Left>
-          </CardItem>
-          </Card>
-            </View>
-        )
-    }
-}
-
-class Box extends Component{
-    render(){
-        return(
-            <View style ={ styles.box}></View>
-        )
-    }
-}
 
 
 export default class Setting extends Component {
@@ -184,10 +93,12 @@ export default class Setting extends Component {
                 <ModalFooter>
                 <ModalButton
                 text="변경"
-                onPress={() => {
+                onPress={ async () => {
                     if(this.state.pwd==this.state.re_pwd){
                         this.setState({ visible: false });
-                        updateInfo(this.state.uID,this.state.pwd).then(alert('비밀번호가 변경되었습니다.'))}
+                        //updateInfo(this.state.uID,this.state.pwd).then(alert('비밀번호가 변경되었습니다.'))}
+                        await Request.PUT(`user/${this.state.uID}`, {pw: this.state.pwd});
+                        alert('비밀번호가 변경되었습니다.')}
                     else{
                         alert('비밀번호와 비밀번호 확인이 맞지 않습니다.');
                     }

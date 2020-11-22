@@ -131,7 +131,12 @@ export default class D0_3_SideLunge extends Component {
                                 alignItems:'flex-end', 
                                 marginBottom:20,
                                 alignItems:'center'}} 
-                                onPress={()=> {this.props.navigation.navigate('D1_ExerciseResult')}
+                                onPress={()=> {
+                                    this.setState({count_per_set:35}); 
+                                    setTimeout(() => {
+                                        console.log(this.state);
+                                        this.props.navigation.navigate('D1_ExerciseResult',{res:this.state});
+                                    }, 2000);}
                                     }>
                                 <Text style={{color: 'white', fontSize:19, fontStyle:'normal',}}>완료</Text>
                         </TouchableOpacity>

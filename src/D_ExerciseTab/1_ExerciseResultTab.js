@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Card, CardItem, Thumbnail, Body, Left, Right, Button, Icon, Content } from 'native-base';
 import ShowResult from './ShowComponent/ShowResult';
+import * as Request from '../request'
 
 const recordExercise = async (records) => {
     try {
@@ -28,28 +29,6 @@ const recordExercise = async (records) => {
     }
 } 
 
-class CircleButton extends Component{
-    render(){
-        return(
-            <TouchableOpacity>
-            <Image
-              style={styles.button}
-              source={require('../Image/example.png')}
-            />
-          </TouchableOpacity>
-        )
-    }
-}
-
-class Profile extends Component {
-    render(){
-        return(
-            <View style={styles.profile}>
-                <CircleButton />
-            </View>
-        )
-    }
-}
 
 class Title extends Component {
     render(){
@@ -62,23 +41,6 @@ class Title extends Component {
 }
 
 
-class MainCom extends Component{
-    render(){
-        return(
-            <ScrollView style={styles.main}>
-                <ShowResult/>
-            </ScrollView>
-        )
-    }
-}
-
-class Box extends Component{
-    render(){
-        return(
-            <View style ={ styles.box}></View>
-        )
-    }
-}
 
 
 export default class ExerciseResult extends Component {
@@ -87,10 +49,10 @@ export default class ExerciseResult extends Component {
         count_per_set: 0,
         uID:0,
         eID:0,
-        cID:3, //임의의 cID
-        calorie_consume:0,
+        cID:0, //임의의 cID
+        
         perform_datetime : '',
-        name:'',
+        
     }
 
     componentDidMount(){
@@ -99,14 +61,15 @@ export default class ExerciseResult extends Component {
             uID:DB.data.users.uID,
             count_per_set: Res.count_per_set,
             eID:Res.eID,
-            calorie_consume:Res.calorie_consume,
+            
             perform_datetime:Res.perform_datetime,
-            name:Res.name,
+           
         });
     }
     render() {
+        console.log(this.state.perform_datetime);
         console.log('this state', this.state);
-        console.log('record', recordExercise(this.state));
+        console.log('record', Request.POST(`user/exercise_record`,this.state));//recordExercise(this.state));
         return (
             <View style={styles.rootcontainer}>
                 <View style={styles.container}>
