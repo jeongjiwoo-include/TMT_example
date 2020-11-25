@@ -6,56 +6,12 @@ import { Container, Header, Button, Icon, Fab, Content } from 'native-base';
 
 global.DB = null;
 
-class CircleButton extends Component{
-    render(){
-        return(
-            <TouchableOpacity>
-            <Image
-              style={styles.button}
-              source={require('../Image/example.png')}
-            />
-          </TouchableOpacity>
-        )
-    }
-}
-
-class Profile extends Component {
-    render(){
-        return(
-            <View style={styles.profile}>
-                <CircleButton />
-            </View>
-        )
-    }
-}
-
 class Title extends Component {
     render(){
         return(
             <View style={styles.title}>
                 <Text style={{fontSize:35, color:'black'}}>홈</Text>
             </View>
-        )
-    }
-}
-
-
-class MainCom extends Component{
-    render(){
-        return(
-            <ScrollView style={styles.main}>
-                <Challenge/>
-                <Challenge/>
-                <Stats/>
-            </ScrollView>
-        )
-    }
-}
-
-class Box extends Component{
-    render(){
-        return(
-            <View style ={ styles.box}></View>
         )
     }
 }

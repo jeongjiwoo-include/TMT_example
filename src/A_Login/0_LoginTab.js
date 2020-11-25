@@ -89,18 +89,8 @@ export default class LoginTab extends Component {
                         >
                         </TextInput>
                         <TouchableOpacity style={styles.button} onPress={ async () => {
-                            /*login(this.state).then((json)=> {
-                                if(json.state==1){
-                                    Data=json; 
-                                    this.props.navigation.navigate('홈',{data:Data}); 
-                                    console.log(json.data.users.name,"로그인");
-                                    console.log(Data,"데이터");
-                                }
-                                else{alert('잘못된 ID 혹은 PW입니다. \n다시 확인하세요.');}
-                            }) */
-                            //root();  
                             try {
-                                var json = await Request.POST('login', this.state)//.then((json)=>{
+                                var json = await Request.POST('login', this.state)
 
                                 if(json){
                                 Data = json;
@@ -109,7 +99,7 @@ export default class LoginTab extends Component {
                                 console.log(Data, "데이터");
                                 }
                                 else {
-                                    throw new Error('msg:wrong ID or PW')
+                                    throw new Error('msg:wrong ID or PW');
                                 }
                             } catch (e) {
                                 alert('잘못된 ID 혹은 PW입니다. \n다시 확인하세요.');

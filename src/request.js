@@ -1,4 +1,4 @@
-const url = 'http://112.172.255.3:3000';
+const url = 'http://118.37.191.82:3000';
 
 exports.GET = async (route) => {
   try {
@@ -41,7 +41,7 @@ exports.PUT = async (route, body) => {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(body),
+      body: JSON.stringify(body), // this.state.name
     });
     if (response.status === 200) {
       const json = await response.json();
