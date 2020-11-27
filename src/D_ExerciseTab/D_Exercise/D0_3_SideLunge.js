@@ -64,7 +64,7 @@ export default class D0_3_SideLunge extends Component {
             uID:0,
             eID:3,
             name:'',
-            calorie_consume:100,
+            calorie_consume:0.6, // 개수당 0.6kcal 
             perform_datetime : '',
 
         }

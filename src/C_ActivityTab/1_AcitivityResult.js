@@ -19,13 +19,14 @@ export default class ActivityResult extends Component {
         eID: [],
         cID: [],
         count_per_set: [],
+        all_kcal: 0,
     }
 
-    addData = (Data) =>{
-        this.data.perform_datetime=Data.perform_datetime;
-        this.data.cID=Data.cID;
-        this.data.eID=Data.eID;
-        this.data.count_per_set=Data.count_per_set;
+    addData = (Data) => {
+        this.data.perform_datetime = Data.perform_datetime;
+        this.data.cID = Data.cID;
+        this.data.eID = Data.eID;
+        this.data.count_per_set = Data.count_per_set;
     }
 
     render() {
@@ -51,25 +52,30 @@ export default class ActivityResult extends Component {
                                     <Text>{this.data.perform_datetime}</Text>
                                 </CardItem>
                                 <CardItem>
-                                    <Body> 
-                                        {this.data.eID.map((num, i)=> {
+                                    <Body>
+                                        {this.data.eID.map((num, i) => {
                                             var Exercise_name = '';
-                                            if (num == 1) Exercise_name = '스쿼트';
-                                            else if (num == 2) Exercise_name = '풀업';
-                                            else if (num == 3) Exercise_name = '사이드런지';
-                                        return (<React.Fragment>
-                                            <Left>
-                                            <Text key={i}> {Exercise_name}</Text> 
-                                            </Left>
-                                            <Right>
-                                            <Text>{this.data.count_per_set[i]}개</Text>
-                                            </Right>
+                                            var kcal = 0;
+                                            
+                                            if (num == 1) { Exercise_name = '스쿼트'; kcal = 0.5 * this.data.count_per_set[i]; this.data.all_kcal +=kcal; }
+                                            else if (num == 2) { Exercise_name = '풀업'; kcal = 7 * this.data.count_per_set[i]; this.data.all_kcal +=kcal;}
+                                            else if (num == 3) { Exercise_name = '사이드런지'; kcal = 0.6 * this.data.count_per_set[i]; this.data.all_kcal +=kcal;}
+                                            
+                                            return (<React.Fragment>
+                                                <Left>
+                                                    <Text key={i}>{Exercise_name}</Text>
+                                                </Left>
+                                                <Right>
+                                                    <Text>{this.data.count_per_set[i]}개</Text>
+                                                    <Text key={i}>{kcal}</Text>
+                                                    <Text></Text>
+                                                </Right>
                                             </React.Fragment>)
-                                            })}
+                                        })}
                                     </Body>
                                 </CardItem>
                                 <CardItem>
-                                    <Image source={{ uri: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pngwing.com%2Fko%2Ffree-png-zloat&psig=AOvVaw04PJfmTmJjTRKrcHAvL6nz&ust=1602562123162000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMjK3aSXruwCFQAAAAAdAAAAABAD' }} style={{ height: 200, width: null, flex: 1 }} />
+                                    <Text>오늘의 총 칼로리 소모량 : {this.data.all_kcal} kcal</Text>
                                 </CardItem>
                             </Card>
                         </ScrollView>

@@ -64,7 +64,7 @@ export default class D0_1_Squat extends Component {
             uID:0,
             eID:1,
             name:'',
-            calorie_consume:100,
+            calorie_consume:0.5,//개수 당 0.43kcal 소모
             perform_datetime : '',
 
         }
@@ -134,7 +134,7 @@ export default class D0_1_Squat extends Component {
                                 marginBottom:20,
                                 alignItems:'center'}} 
                                 onPress={()=> {
-                                    this.setState({count_per_set:35}); 
+                                    this.setState({count_per_set:100}); 
                                     setTimeout(() => {
                                         console.log(this.state);
                                         this.props.navigation.navigate('D1_ExerciseResult',{res:this.state});

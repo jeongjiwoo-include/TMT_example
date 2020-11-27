@@ -64,7 +64,7 @@ export default class D0_2_PullUp extends Component {
             uID:0,
             eID:2,
             name:'',
-            calorie_consume:100,
+            calorie_consume:6, // 1개당 6kcal
             perform_datetime : '',
 
         }
@@ -132,7 +132,7 @@ export default class D0_2_PullUp extends Component {
                                 marginBottom:20,
                                 alignItems:'center'}} 
                                 onPress={()=> {
-                                    this.setState({count_per_set:35}); 
+                                    this.setState({count_per_set:15}); 
                                     setTimeout(() => {
                                         console.log(this.state);
                                         this.props.navigation.navigate('D1_ExerciseResult',{res:this.state});

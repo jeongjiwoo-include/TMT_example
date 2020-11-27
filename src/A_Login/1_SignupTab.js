@@ -4,68 +4,7 @@ import { Container, Content, Icon } from 'native-base';
 import DatePicker from 'react-native-date-picker';
 import * as Request from '../request';
 
-
-/*const join = async (user) => {
-    try {
-        let response = await fetch(
-            'http://118.127.215.194:3000/join', {
-                method: 'POST',
-                headers: {
-                    Accept: 'appplication/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    id: user.id,
-                    pw: user.pw,
-                    name: user.name,
-                    email: user.email,
-                    phone_number: user.phone_number,
-                    birth_date: user.birth_date,
-                    height: user.height,
-                    weight: user.weight,
-                    public: user.public,
-                    profile_image: user.profile_image,
-                })
-            });
-        let json = await response.json();
-        console.log(json);
-        return json;
-    } catch (error) {
-        console.error(error);
-    }
-}*/
-const join = async (user) => {
-    try {
-        let response = await fetch(
-            'http://112.172.255.3:3000/join/', {
-            method: 'POST',
-            headers: {
-                Accept: 'appplication/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                id: user.id,
-                pw: user.pw,
-                name: user.name,
-                email: user.email,
-                phone_number: user.phone_number,
-                birth_date: user.birth_date,
-                height: user.height,
-                weight: user.weight,
-                public: user.public,
-                profile_image: user.profile_image
-            })
-        });
-        let json = await response.json();
-        console.log(json);
-        return json;
-    } catch (error) {
-        console.error(error);
-    }
-}
-
 var tmp = new Date();
-
 
 export default class SignupTab extends Component {
     state = {
@@ -82,6 +21,15 @@ export default class SignupTab extends Component {
         profile_image: '',
     }
 
+    email = {
+        address: '',
+        domain: '',
+    }
+    phone_num = {
+        first : '',
+        second: '',
+    }
+
     handleID = (text) => {
         this.setState({ id: text });
     }
@@ -94,16 +42,15 @@ export default class SignupTab extends Component {
     handleNAME = (text) => {
         this.setState({ name: text })
     }
-    handleEMAIL = (text) => {
-        this.setState({ email: text })
+    handleEMAIL = (address, domain) => {
+        var email_address = `${address}@${domain}`
+        this.setState({ email: email_address })
     }
-    handlePHONE = (text) => {
-        this.setState({ phone_number: text })
+    handlePHONE = (first, second) => {
+        var phone = `010-${first}-${second}`
+        this.setState({ phone_number: phone })
     }
-    handleBIRTH = (date) => { //생년월일을 받아서 계산하게
-        //console.log(date);
-        //console.log(this.state.birth_date);
-
+    handleBIRTH = (date) => { 
         let res = ''
         let year = date.getFullYear();
         let month = date.getMonth();
@@ -126,10 +73,9 @@ export default class SignupTab extends Component {
     }*/
     signCheck = (id, pw, re_pw, name, email, phone_number, age, height, weight) => {
         if (pw != re_pw) { alert('비밀번호 확인이 잘못 되었습니다. 재확인 하세요.');throw new Error('msg:Wrong password_re') };
-        //alert('id : ' + id+ '\npw : '+pw+'\nre_pw : '+re_pw)
-        
-
+        console.log(this.state);
     }
+        
     render() {
         return (
             <View style={styles.rootcontainer}>
@@ -176,40 +122,67 @@ export default class SignupTab extends Component {
                         >
                         </TextInput>
                         <Text style={{ alignItems: 'flex-start' }}>이메일</Text>
+                        <View style={{flexDirection:'row'}}>
                         <TextInput
-                            style={styles.input}
+                            style={styles.input_row}
                             underlineColorAndroid="transparent"
                             autoCapitalize="none"
                             placeholderTextColor='#e3f6f5'
-                            onChangeText={this.handleEMAIL}
+                            onChangeText={(text)=>this.email.address=text}
                         >
                         </TextInput>
-                        <Text style={{ alignItems: 'flex-start' }}>휴대전화번호</Text>
+                        <Text style={{fontSize:28 }}>@</Text>
                         <TextInput
-                            style={styles.input}
+                            style={styles.input_row}
                             underlineColorAndroid="transparent"
                             autoCapitalize="none"
                             placeholderTextColor='#e3f6f5'
-                            onChangeText={this.handlePHONE}
+                            onChangeText={(text)=>{this.email.domain=text; this.handleEMAIL(this.email.address, this.email.domain);}}
                         >
                         </TextInput>
+                        </View>
+                        <Text style={{ alignItems: 'flex-start'}}>휴대전화번호</Text>
+                        <View style={{flexDirection:'row'}}>
+                            <Text style={{fontSize:28 }}>010  -  </Text>
+                        <TextInput
+                            style={styles.input_row_phone}
+                            underlineColorAndroid="transparent"
+                            autoCapitalize="none"
+                            placeholderTextColor='#e3f6f5'
+                            keyboardType="number-pad"
+                            onChangeText={(text)=>{this.phone_num.first=text}}
+                        >
+                        </TextInput>
+                        <Text style={{fontSize:28 }}>  -  </Text>
+                        <TextInput
+                            style={styles.input_row_phone}
+                            underlineColorAndroid="transparent"
+                            autoCapitalize="none"
+                            placeholderTextColor='#e3f6f5'
+                            keyboardType="number-pad"
+                            onChangeText={(text)=>{this.phone_num.second=text; this.handlePHONE(this.phone_num.first, this.phone_num.second);}}
+                        >
+                        </TextInput>
+                        </View>
                         <Text style={{ alignItems: 'flex-start' }}>생년월일</Text>
                         <DatePicker date={tmp} onDateChange={(date) => { tmp = date; this.handleBIRTH(tmp) }} mode={'date'} />
-                        <Text style={{ alignItems: 'flex-start' }}>키</Text>
+                        <Text style={{ alignItems: 'flex-start' }}>키 (단위:cm)</Text>
                         <TextInput
                             style={styles.input}
                             underlineColorAndroid="transparent"
                             autoCapitalize="none"
                             placeholderTextColor='#e3f6f5'
+                            keyboardType="number-pad"
                             onChangeText={this.handleHEIGHT}
                         >
                         </TextInput>
-                        <Text style={{ alignItems: 'flex-start' }}>몸무게</Text>
+                        <Text style={{ alignItems: 'flex-start' }}>몸무게 (단위:kg)</Text>
                         <TextInput
                             style={styles.input}
                             underlineColorAndroid="transparent"
                             autoCapitalize="none"
                             placeholderTextColor='#e3f6f5'
+                            keyboardType="number-pad"
                             onChangeText={this.handleWEIGHT}
                         >
                         </TextInput>
@@ -280,7 +253,31 @@ const styles = StyleSheet.create({
     },
     input: {
         alignItems: 'stretch',
-        width: 360,
+        width: 350,
+        height: 40,
+        borderRadius: 10,
+        backgroundColor: '#bae8e8',
+        justifyContent: 'center',
+        marginBottom: 20,
+        color: 'white',
+        fontSize: 14,
+        fontStyle: 'normal',
+    },
+    input_row: {
+        alignItems: 'stretch',
+        width: 162.5,
+        height: 40,
+        borderRadius: 10,
+        backgroundColor: '#bae8e8',
+        justifyContent: 'center',
+        marginBottom: 20,
+        color: 'white',
+        fontSize: 14,
+        fontStyle: 'normal',
+    },
+    input_row_phone: {
+        alignItems: 'stretch',
+        width: 115,
         height: 40,
         borderRadius: 10,
         backgroundColor: '#bae8e8',

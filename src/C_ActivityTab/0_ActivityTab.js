@@ -170,7 +170,7 @@ export default class ActivityTab extends Component {
                                                         </Left>
                                                         <Right>
                                                             <Text>{obj.count_per_set[j]}개</Text>
-                                                          
+                                                            <Text></Text>
                                                         </Right></React.Fragment>)
                                                 })}
                                             </Body>
