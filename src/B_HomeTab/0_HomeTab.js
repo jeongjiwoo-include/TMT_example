@@ -25,9 +25,20 @@ export default class HomeTab extends Component {
             active: false
         };
     }
-    componentDidMount(){
+    FriendRequestList = [];
+    FriendData = {
+        friend_uID: -1,
+    }
+    componentDidMount() {
         const Data = this.props.navigation.getParam('data');
-        DB=Data;
+        DB = Data;
+        const friendRequest = DB.data.request;
+        friendRequest.map((obj) => {
+            this.FriendData.friend_uID = obj.friend_uID;
+            this.FriendRequestList.push(this.FriendData);
+        }
+        )
+        console.log('F : ', this.FriendRequestList);
     }
     render() {
         return (
@@ -55,7 +66,7 @@ export default class HomeTab extends Component {
                         containerStyle={{ }}
                         style={{ backgroundColor: '#bae8e8' }}
                         position="bottomRight"
-                        onPress={() => this.props.navigation.navigate('알림')}>
+                        onPress={() => this.props.navigation.navigate('알림',{data:this.FriendRequestList})}>
                         <Icon name="ios-alert"/>
                     </Fab>
                 </View>

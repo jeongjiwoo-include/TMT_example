@@ -61,13 +61,13 @@ export default class ActivityResult extends Component {
                                             else if (num == 2) { Exercise_name = '풀업'; kcal = 7 * this.data.count_per_set[i]; this.data.all_kcal +=kcal;}
                                             else if (num == 3) { Exercise_name = '사이드런지'; kcal = 0.6 * this.data.count_per_set[i]; this.data.all_kcal +=kcal;}
                                             
-                                            return (<React.Fragment>
+                                            return (<React.Fragment key={i}>
                                                 <Left>
-                                                    <Text key={i}>{Exercise_name}</Text>
+                                                    <Text >{Exercise_name}</Text>
                                                 </Left>
                                                 <Right>
                                                     <Text>{this.data.count_per_set[i]}개</Text>
-                                                    <Text key={i}>{kcal}</Text>
+                                                    <Text>{kcal}</Text>
                                                     <Text></Text>
                                                 </Right>
                                             </React.Fragment>)

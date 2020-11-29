@@ -53,8 +53,6 @@ export default class ActivityTab extends Component {
     componentDidMount() {
         this.setState({ uID: DB.data.users.uID })
         this.addDateTime();
-        console.log(this.result);
-
     }
     addDateTime = () => {
         var time = DB.data.exercise_records;
@@ -85,9 +83,7 @@ export default class ActivityTab extends Component {
             else if (a.perform_datetime > b.perform_datetime) return 1;
             else return 0;
         }) // date_time 별로 sorting
-        console.log('time cut : ', time_cut) 
-        ////////////////////////////////////////////////////////////////////////////////////
-
+        
         for (let i = 0; i < time_cut.length; i++) {
             var data = {
                 perform_datetime: '',
@@ -149,9 +145,9 @@ export default class ActivityTab extends Component {
                             {this.result.map((obj, i) => {
                                 return (
                                     <Card>
-                                        <CardItem button onPress={() => { console.log(DB.data.exercise_records); this.props.navigation.navigate('C1_ActivityResult',{data:this.result[i]}); }} style={{ borderBottomColor: 'black', borderBottomWidth: 0.5 }}>
+                                        <CardItem key={i} button onPress={() => { console.log(DB.data.exercise_records); this.props.navigation.navigate('C1_ActivityResult',{data:this.result[i]}); }} style={{ borderBottomColor: 'black', borderBottomWidth: 0.5 }}>
                                             <Left>
-                                                <Text key={i}>{obj.perform_datetime}</Text>
+                                                <Text>{obj.perform_datetime}</Text>
                                             </Left>
                                             <Right>
                                                 <Icon name="arrow-forward" />
@@ -164,14 +160,16 @@ export default class ActivityTab extends Component {
                                                     if (obj2 == 1) Exercise_name = '스쿼트';
                                                     else if (obj2 == 2) Exercise_name = '풀업';
                                                     else if (obj2 == 3) Exercise_name = '사이드런지';
-                                                    return (<React.Fragment>
+                                                    return (
+                                                    <React.Fragment key={j}>
                                                         <Left>
-                                                        <Text key={j}>{Exercise_name}</Text>
+                                                        <Text >{Exercise_name}</Text>
                                                         </Left>
                                                         <Right>
                                                             <Text>{obj.count_per_set[j]}개</Text>
                                                             <Text></Text>
-                                                        </Right></React.Fragment>)
+                                                        </Right>
+                                                        </React.Fragment>)
                                                 })}
                                             </Body>
                                         </CardItem>

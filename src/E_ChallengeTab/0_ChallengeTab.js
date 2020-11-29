@@ -5,29 +5,6 @@ import Show from './ShowComponent/Show'
 import { Card, CardItem, Thumbnail, Body, Left, Right, Button, Icon, Content } from 'native-base';
 import ProgressBar from 'react-native-progress/Bar';
 
-class CircleButton extends Component{
-    render(){
-        return(
-            <TouchableOpacity>
-            <Image
-              style={styles.button}
-              source={require('../Image/example.png')}
-            />
-          </TouchableOpacity>
-        )
-    }
-}
-
-class Profile extends Component {
-    render(){
-        return(
-            <View style={styles.profile}>
-                <CircleButton />
-            </View>
-        )
-    }
-}
-
 class Title extends Component {
     render(){
         return(
@@ -39,57 +16,25 @@ class Title extends Component {
 }
 
 
-class MainCom extends Component{
-    render(){
-        return(
-            <ScrollView style={styles.main}>
-                <Card>
-                    <CardItem button onPress={()=>{console.log(DB); this.props.navigation.navigate('E1_MakeChallenge');}}>
-                        <Left>
-                            <Text>챌린지 만들기</Text>
-                            </Left>
-                            <Right>
-                                <Icon name="add-circle-outline"/>
-                            </Right>
-                    </CardItem>
-                </Card>
-                <Card>
-                    <CardItem button onPress={()=> alert('30일스쿼트챌린지')}>
-                        <Left>
-                            <Text>30일 스쿼트 챌린지</Text>
-                            </Left>
-                            <Right>
-                                <Icon name="arrow-forward"/>
-                            </Right>
-                    </CardItem>
-                    <CardItem button onPress={()=> alert('매일하는 7분 운동')}>
-                        <Left>
-                            <Text>매일하는 7분 운동</Text>
-                            </Left>
-                            <Right>
-                                <Icon name="arrow-forward"/>
-                            </Right>
-                    </CardItem>
-                </Card>
-            </ScrollView>
-        )
-    }
-}
-
-class Box extends Component{
-    render(){
-        return(
-            <View style ={ styles.box}></View>
-        )
-    }
-}
-
-
 export default class ChallengeTab extends Component {
+    challengeList = []
+    challengeData = {
+        name: '',
+        description: '',
+        calorie_consume: 0,
+        start_datetime: '',
+        finish_datetime: '',
+        perform_day: '', //요일
+        eID: [],
+        target_total_count: [],
+        friend_uIDs: [],
+
+    }
+
     render() {
         return (
             <View style={styles.rootcontainer}>
-                <View style={styles.container}>
+                <View style={styles.container}> 
                     <View style={styles.profile}>
                         <TouchableOpacity onPress={()=>this.props.navigation.navigate('내정보')}>
                             <Image

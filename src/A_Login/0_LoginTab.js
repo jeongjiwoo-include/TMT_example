@@ -6,42 +6,6 @@ import * as Request from '../request';
 
 var Data = null;
 
-/*const root = async () => {
-    try {
-        let response = await fetch(
-            'http://118.127.215.194:3000/'
-        );
-        let json = await response.json();
-        console.log(json);
-        return json;
-    } catch (error) {
-        console.error(error);
-    }
-}*/
-
-const url = 'http://112.172.255.3:3000';
-
-const login = async (user) => {
-    try {
-        let response = await fetch(
-            //'http://118.127.215.194:3000/login', {
-            `${url}/login`, {
-            method: 'POST',
-            headers: {
-                Accept: 'appplication/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(user)
-        });
-        let json = await response.json();
-        console.log(json);
-        return json;
-    } catch (error) {
-        console.error(error);
-        return null;
-    }
-}
-
 export default class LoginTab extends Component {
     state = {
         id: '',
