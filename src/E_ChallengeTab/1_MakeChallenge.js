@@ -2,34 +2,21 @@ import React, { Component } from 'react';
 import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity, LogBox } from 'react-native';
 import Make from './ShowComponent/MakeChallenge'
 import Show from './ShowComponent/Show'
-import { Card, CardItem, Thumbnail, Body, Left, Right, Button, Icon, Content, Form, Input, Item, Label, CheckBox, ListItem, DatePicker } from 'native-base';
+import { 
+    Card, 
+    CardItem, 
+    Thumbnail, 
+    Body, 
+    Left, Right, 
+    Button, Icon, 
+    Content, Form, Input, 
+    Item, Label, CheckBox, ListItem,
+    DatePicker, Textarea
+ } from 'native-base';
 import Modal, { ModalContent, ModalTitle, ModalFooter, ModalButton } from 'react-native-modals';
 import * as Request from '../request';
 
 LogBox.ignoreLogs(['Animated: `useNativeDriver` was not specified.',]);
-
-class CircleButton extends Component {
-    render() {
-        return (
-            <TouchableOpacity>
-                <Image
-                    style={styles.button}
-                    source={require('../Image/example.png')}
-                />
-            </TouchableOpacity>
-        )
-    }
-}
-
-class Profile extends Component {
-    render() {
-        return (
-            <View style={styles.profile}>
-                <CircleButton />
-            </View>
-        )
-    }
-}
 
 class Title extends Component {
     render() {
@@ -52,6 +39,7 @@ export default class ChallengeTab extends Component {
             c_exercise: null,
             c_due: null,
             c_friend: null,
+            c_description : '',
             //챌린지 정보
             c_exerciseModal: false,
             c_dueModal: false,
@@ -139,13 +127,14 @@ export default class ChallengeTab extends Component {
                     </View>
                     <Title />
                     <Content>
-                        <View style={styles.main}>
+                        <ScrollView style={styles.main}>
                             <Card>
                                 <Form>
                                     <Item stackedLabel>
-                                        <Label style={{ fontSize: 20 }}>이름 설정</Label>
+                                        <Label style={{ fontSize: 20, color:'black' }}>이름 설정</Label>
                                         <Input value={this.state.c_name} onChangeText={val => { this.setState({ c_name: val }); this.data.name = val; }} />
                                     </Item>
+                                    <Textarea style={{borderColor:'white', marginHorizontal:5}} rowSpan={4} bordered placeholder="챌린지 설명" onChangeText={val =>{this.setState({c_description:val});this.data.description=val;}}></Textarea>
                                 </Form>
 
                                 <CardItem button onPress={() => this.setState({ c_exerciseModal: true })} style={{ height: 100 }}>
@@ -337,8 +326,9 @@ export default class ChallengeTab extends Component {
                                         />
                                     </ModalFooter>
                                 </Modal>
+                                
                             </Card>
-                        </View>
+                        </ScrollView>
                     </Content>
                     <View style={{ height: 50, alignItems: 'flex-end', marginBottom: 10 }}>
                         <TouchableOpacity
