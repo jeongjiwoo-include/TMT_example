@@ -88,7 +88,7 @@ export default class ExerciseResult extends Component {
                     <Title />
                     <Content>
                         <Card>
-                            <CardItem>
+                            <CardItem style={{borderStyle:'dotted', borderBottomWidth:0.5}}>
                                 <Text>{`${this.state.perform_datetime}`}</Text>
                             </CardItem>
                             <CardItem>

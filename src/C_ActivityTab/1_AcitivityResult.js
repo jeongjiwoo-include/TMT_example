@@ -48,11 +48,11 @@ export default class ActivityResult extends Component {
                     <Content>
                         <ScrollView style={styles.main}>
                             <Card>
-                                <CardItem>
+                                <CardItem style={{borderStyle:'dotted', borderBottomWidth:0.5}}>
                                     <Text>{this.data.perform_datetime}</Text>
                                 </CardItem>
                                 <CardItem>
-                                    <Body>
+                                    <Body style={{alignItems:'center'}}>
                                         {this.data.eID.map((num, i) => {
                                             var Exercise_name = '';
                                             var kcal = 0;
@@ -62,19 +62,18 @@ export default class ActivityResult extends Component {
                                             else if (num == 3) { Exercise_name = '사이드런지'; kcal = 0.6 * this.data.count_per_set[i]; this.data.all_kcal +=kcal;}
                                             
                                             return (<React.Fragment key={i}>
-                                                <Left>
+                                                
                                                     <Text >{Exercise_name}</Text>
-                                                </Left>
-                                                <Right>
+                                                
                                                     <Text>{this.data.count_per_set[i]}개</Text>
-                                                    <Text>{kcal}</Text>
+                                                    <Text>운동 별 칼로리 소모량 : {kcal} kcal</Text>
                                                     <Text></Text>
-                                                </Right>
+                                               
                                             </React.Fragment>)
                                         })}
                                     </Body>
                                 </CardItem>
-                                <CardItem>
+                                <CardItem style={{borderStyle:'dotted', borderTopWidth:0.5}}>
                                     <Text>오늘의 총 칼로리 소모량 : {this.data.all_kcal} kcal</Text>
                                 </CardItem>
                             </Card>

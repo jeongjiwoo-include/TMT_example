@@ -57,8 +57,6 @@ export default class ActivityTab extends Component {
     addDateTime = () => {
         var time = DB.data.exercise_records;
         var time_cut = new Array();
-
-        console.log(time.length);
         for (let i = 0; i < time.length; i++) {
             var tmp = {
                 uID: 0,

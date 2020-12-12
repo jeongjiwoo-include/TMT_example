@@ -38,7 +38,6 @@ export default class HomeTab extends Component {
             this.FriendRequestList.push(this.FriendData);
         }
         )
-        console.log('F : ', this.FriendRequestList);
     }
     render() {
         return (

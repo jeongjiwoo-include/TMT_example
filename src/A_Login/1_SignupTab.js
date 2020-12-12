@@ -52,10 +52,10 @@ export default class SignupTab extends Component {
     }
     handleBIRTH = (date) => { 
         let res = ''
-        let year = date.getFullYear();
-        let month = date.getMonth();
+        let year = date.getFullYear(); console.log(`year : ${year}`);
+        let month = date.getMonth()+1; console.log(`month : ${month}`);
         if (month < 10) { month = `0${month}` }
-        let day = date.getDate();
+        let day = date.getDate(); console.log(`day : ${day}`);
         if (day < 10) { day = `0${day}` }
         res = `${year}-${month}-${day}`;
 
@@ -165,7 +165,7 @@ export default class SignupTab extends Component {
                         </TextInput>
                         </View>
                         <Text style={{ alignItems: 'flex-start' }}>생년월일</Text>
-                        <DatePicker date={tmp} onDateChange={(date) => { tmp = date; this.handleBIRTH(tmp) }} mode={'date'} />
+                        <DatePicker date={tmp} onDateChange={(date) => { console.log(date); tmp = date; console.log(tmp);this.handleBIRTH(tmp) }} mode={'date'} />
                         <Text style={{ alignItems: 'flex-start' }}>키 (단위:cm)</Text>
                         <TextInput
                             style={styles.input}

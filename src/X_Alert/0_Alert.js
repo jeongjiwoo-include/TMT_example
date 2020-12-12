@@ -26,12 +26,18 @@ export default class Alert extends Component {
             selected_hour: "00", // time picker
             selected_minute: "00", // time picker
             FriendRequestList: [],
+            ChallengeRequestList: [],
         };
     }
     FriendData = {
         uID:-1,
         friend_uID:-1
     } //uID => 나에게 요청한 사용자의 uID
+    ChallengeData = {
+        //cID:-1,
+        //name: '',
+        //description:'',
+    }
 
 
     // onValueChange_hour(value) {
@@ -52,6 +58,7 @@ export default class Alert extends Component {
 
     render() {
         const friendRequest = DB.data.requested;
+        const challengeRequest = DB.data.invited;
         const uID = DB.data.users.uID;
         friendRequest.map((obj) => {
             this.FriendData.uID = obj.uID;
@@ -59,7 +66,14 @@ export default class Alert extends Component {
             this.state.FriendRequestList.push(this.FriendData);
         }
         )
-        console.log('F : ', this.state.FriendRequestList);
+        console.log(challengeRequest);
+        challengeRequest.map((obj)=>{
+            this.ChallengeData= obj.challenge;
+            //this.ChallengeData.name= obj.challenge.name;
+            //this.ChallengeData.description=obj.challenge.description;
+            this.state.ChallengeRequestList.push(this.ChallengeData);
+        })
+
         return (
             <View style={styles.rootcontainer}>
                 <View style={styles.container}>
@@ -87,6 +101,7 @@ export default class Alert extends Component {
                                                 <Icon name="alert" />
                                             </Left>
                                             <Text>'uID {obj.uID}' 님이 당신에게 친구요청을 보냈습니다.</Text>
+                                            
                                         </CardItem>
                                         <CardItem style={{ justifyContent: 'space-evenly' }}>
                                             <Button style={{ width: 100, height: 25, justifyContent: 'center', backgroundColor: '#bae8e8' }} onPress={async     () => {
@@ -99,6 +114,43 @@ export default class Alert extends Component {
                                             <Button style={{ width: 100, height: 25, justifyContent: 'center', backgroundColor: '#bae8e8' }} onPress={async () => {
                                                 console.log('거절 ....>', obj);
                                                 var json = await Request.DELETE(`user/friend/request/${obj.friend_uID}/${obj.uID}`, obj);
+                                                console.log('reject : ', json);
+                                            }}>
+                                                <Text style={{ color: 'white' }}>거절</Text>
+                                            </Button>
+                                            
+                                        </CardItem>
+                                    </Card>
+                                );
+                            })}
+                            {this.state.ChallengeRequestList.map((obj, i) => {
+                                return (
+                                    <Card key={i}>
+                                        <CardItem style={{ borderBottomColor: 'black', borderBottomWidth: 0.5 }}>
+                                            <Left>
+                                                <Text>챌린지 요청</Text>
+                                            </Left>
+                                        </CardItem>
+                                        <CardItem>
+                                            <Left>
+                                                <Icon name="alert" />
+                                            </Left>
+                                            <Text>'{obj.name}' 챌린지 요청을 받았습니다.</Text>
+                                        </CardItem>
+                                        <CardItem>
+                                            <Text>                   챌린지 설명 : {obj.description}</Text>
+                                        </CardItem>
+                                        <CardItem style={{ justifyContent: 'space-evenly' }}>
+                                            <Button style={{ width: 100, height: 25, justifyContent: 'center', backgroundColor: '#bae8e8' }} onPress={async     () => {
+                                                console.log('수락 ....>', obj);
+                                                var json = await Request.PUT(`user/challenge/invite/${DB.data.users.uID}/${obj.cID}`, obj).then(console.log('ok'));
+                                                console.log('ok : ', json);
+                                            }}>
+                                                <Text style={{ color: 'white' }}>수락</Text>
+                                            </Button>
+                                            <Button style={{ width: 100, height: 25, justifyContent: 'center', backgroundColor: '#bae8e8' }} onPress={async () => {
+                                                console.log('거절 ....>', obj);
+                                                var json = await Request.DELETE(`user/challenge/invite/${DB.data.users.uID}/${obj.cID}`, obj);
                                                 console.log('reject : ', json);
                                             }}>
                                                 <Text style={{ color: 'white' }}>거절</Text>

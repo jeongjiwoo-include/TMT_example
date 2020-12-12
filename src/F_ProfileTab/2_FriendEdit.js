@@ -32,6 +32,8 @@ const recommedFriend = [
 ];
 
 
+
+
 export default class FriendEdit extends Component {
     constructor(props) {
         super(props);
@@ -51,11 +53,14 @@ export default class FriendEdit extends Component {
     }
 
 
+
     componentDidMount() {
         const friendList = DB.data.friends;
         console.log(friendList);
-        friendList.map((obj)=>{this.friendData.frienduID=obj.uID;
-            this.friendsList.push(this.friendData);});
+        friendList.map(obj=>{
+            this.friendData.frienduID=obj.uID; 
+            this.friendsList.push(this.friendData);
+        }); //비동기 처리 필요
         this.setState({ uID: DB.data.users.uID });
         console.log('friends :', this.friendsList);
 

@@ -9,7 +9,7 @@ export default class ShowChallenge extends Component {
     }
     render() {
         const data = this.props.navigation.getParam('data');
-        console.log(data);
+        console.log('data:', data);
 
         var finish_date = new Date(data.finish_datetime);
         var start_date = new Date(data.start_datetime);
@@ -47,6 +47,12 @@ export default class ShowChallenge extends Component {
                                 </CardItem>
                                 <CardItem>
                                     <Text>{data.description}</Text>
+                                </CardItem>
+                                <CardItem>
+                                    <Text>{data.eID}</Text>
+                                </CardItem>
+                                <CardItem>
+                                    <Text>{data.target_total_count}</Text>
                                 </CardItem>
                             </Card>
                         </View>

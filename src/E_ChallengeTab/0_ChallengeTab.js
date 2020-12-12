@@ -39,8 +39,8 @@ export default class ChallengeTab extends Component {
             this.challengeData.calorie_consume=obj.challenge.calorie_consume;
             this.challengeData.start_datetime=obj.challenge.start_datetime;
             this.challengeData.finish_datetime=obj.challenge.finish_datetime;
-            this.challengeData.eID = obj.challenge.eID;
-            this.challengeData.target_total_count=obj.challenge.target_total_count;
+            console.log('routine', obj.challenge.routine);//.map((x)=>{this.challengeData.eID.push(x)});
+            console.log(obj.challenge.target_total_count);//.map((x)=>{this.challengeData.target_total_count.push(x)});
             this.challengeList.push(this.challengeData);
         }
             )
@@ -56,7 +56,7 @@ export default class ChallengeTab extends Component {
         const success = DB.data.success;
         const failed = DB.data.failed;
         this.addData(goingon);
-        console.log('challenge list : ', goingon);
+        console.log('challenge list goinon: ', goingon.routine);
         this.addData(success);
         this.addData(failed);
         console.log('challenge list : ', this.challengeList);
@@ -86,6 +86,7 @@ export default class ChallengeTab extends Component {
                             </Card>
                             <ScrollView style={styles.main}>
                                 {this.challengeList.map((obj,i)=>{
+                                    var state = 'go';
                                     var finish_date = new Date(obj.finish_datetime);
                                     var start_date = new Date(obj.start_datetime);
                                     var today_date = new Date();
@@ -95,7 +96,11 @@ export default class ChallengeTab extends Component {
                                     console.log(`finish : ${finish_date} / start : ${start_date} / today : ${today_date}`);
                                     return(
                                     <Card key={i}>
-                                    <CardItem button onPress={()=> this.props.navigation.navigate('E2_ShowChallenge',{data : obj})} style={{height:100}}>
+                                    <CardItem button onPress={()=> {
+                                        if(progressRate >=1.00){
+                                            state = 'end';
+                                        }
+                                        this.props.navigation.navigate('E2_ShowChallenge',{data : obj});}} style={{height:100}}>
                                         <Left>
                                             <Text style={{fontSize:20}}>{obj.name}</Text>
                                             </Left>
