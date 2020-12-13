@@ -39,8 +39,8 @@ export default class ChallengeTab extends Component {
             this.challengeData.calorie_consume=obj.challenge.calorie_consume;
             this.challengeData.start_datetime=obj.challenge.start_datetime;
             this.challengeData.finish_datetime=obj.challenge.finish_datetime;
-            console.log('routine', obj.challenge.routine);//.map((x)=>{this.challengeData.eID.push(x)});
-            console.log(obj.challenge.target_total_count);//.map((x)=>{this.challengeData.target_total_count.push(x)});
+            obj.routine.map((x)=>{this.challengeData.eID.push(x.eID); this.challengeData.target_total_count.push(x.target_total_count)});
+            
             this.challengeList.push(this.challengeData);
         }
             )
@@ -56,7 +56,6 @@ export default class ChallengeTab extends Component {
         const success = DB.data.success;
         const failed = DB.data.failed;
         this.addData(goingon);
-        console.log('challenge list goinon: ', goingon.routine);
         this.addData(success);
         this.addData(failed);
         console.log('challenge list : ', this.challengeList);
@@ -93,7 +92,7 @@ export default class ChallengeTab extends Component {
                                     var total_date = this.daysDiff(start_date,finish_date);
                                     var now_date = this.daysDiff(start_date,today_date);
                                     var progressRate = now_date/total_date;
-                                    console.log(`finish : ${finish_date} / start : ${start_date} / today : ${today_date}`);
+                                  
                                     return(
                                     <Card key={i}>
                                     <CardItem button onPress={()=> {
@@ -113,7 +112,7 @@ export default class ChallengeTab extends Component {
                                         <Text>{now_date} / {total_date} Days</Text>
                                         </Left>
                                         <Right>
-                                        <Text>순위 : </Text>    
+                                        {/* <Text>순위 : </Text>     */}
                                         </Right>                                
                                     </CardItem>
                                     <CardItem style={{justifyContent:'center', borderBottomColor:'black', borderBottomWidth:0.5}}>

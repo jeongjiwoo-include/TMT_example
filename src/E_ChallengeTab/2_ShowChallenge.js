@@ -39,21 +39,29 @@ export default class ShowChallenge extends Component {
                                         <Text>{now_date} / {total_date} Days</Text>
                                     </Left>
                                     <Right>
-                                        <Text>순위 : </Text>
+                                        {/* <Text>순위 : </Text> */}
                                     </Right>
                                 </CardItem>
                                 <CardItem style={{ justifyContent: 'center' }}>
                                     <ProgressBar color={'#272343'} unfilledColor={'#bae8e8'} borderWidth={0} progress={progressRate} width={300} />
                                 </CardItem>
                                 <CardItem>
-                                    <Text>{data.description}</Text>
+                                    <Text>챌린지 설명 : {data.description}</Text>
                                 </CardItem>
-                                <CardItem>
-                                    <Text>{data.eID}</Text>
-                                </CardItem>
-                                <CardItem>
-                                    <Text>{data.target_total_count}</Text>
-                                </CardItem>
+                                { data.eID.map((obj,i)=>{
+                                    var exercise_name = ''
+                                    if(obj == 1) exercise_name='스쿼트';
+                                    else if(obj == 2) exercise_name='풀업';
+                                    else if(obj == 3) exercise_name='사이드 런지';
+                                    return(
+                                    <CardItem key={i}>
+                                        <Left>
+                                        <Text>{exercise_name}</Text>
+                                        </Left>
+                                        <Right>
+                                            <Text>{data.target_total_count[i]}회</Text>
+                                        </Right>
+                                    </CardItem>)})}
                             </Card>
                         </View>
                     </Content>
