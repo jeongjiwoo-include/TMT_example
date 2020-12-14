@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Card, CardItem, Thumbnail, Body, Left, Right, Button, Content, Icon, ListItem,CheckBox } from 'native-base';
 import Modal, { ModalContent, ModalTitle, ModalFooter, ModalButton } from 'react-native-modals';
+import {RNCamera} from 'react-native-camera-tflite';
 
 class CircleButton extends Component {
     render() {
@@ -62,6 +63,7 @@ export default class D0_1_Squat extends Component {
         super(props);
         this.state = {
             visible: false,
+            output:'',
         }
     }
     data = {
@@ -80,6 +82,13 @@ export default class D0_1_Squat extends Component {
         name : '',
         checked: false,
     };
+
+    processOutput({data}){
+        const squat = data[935];
+        const is_squat = squat > 0.2 ? "squat" : "not squat";
+        const output =`${is_squat}`;
+        this.setState({output:output});
+    }
 
     componentDidMount() {
         const Data = this.props.navigation.getParam('data');
@@ -128,7 +137,13 @@ export default class D0_1_Squat extends Component {
 
 
     render() {
-
+        const modelParams = {
+            file:"squat_model.tflite",
+            inputDimX:224,
+            inputDimY:224,
+            outputDim:1001,
+            freqms: 0
+        };
         return (
             <View style={styles.rootcontainer}>
                 <View style={styles.container}>
@@ -142,7 +157,27 @@ export default class D0_1_Squat extends Component {
                     </View>
                     <Title />
                     <Content>
-                        <MainCom />
+                        <View style={styles.main}>
+                            <RNCamera ref={ref => { this.camera = ref; }}
+                                style={{
+                                    flex: 1,
+                                    justifyContent: 'center',
+                                    alignItems: 'center'
+                                }}
+                                type={RNCamera.Constants.Type.back}
+                                flashMode={RNCamera.Constants.FlashMode.on}
+                                permissionDialogTitle={'카메라 접근을 허용 해주세요.'}
+                                permissionDialogMessage={'휴대폰의 카메라 접근을 허용해야합니다.'}
+                                onModelProcessed={data => this.processOutput(data)}
+                                modelParams={modelParams}
+                            >
+                                <Text style={{
+                                    color: 'white',
+                                    fontSize: 18,
+                                    fontWeight: 'bold'
+                                }}>{this.state.output}</Text>
+                            </RNCamera>
+                        </View>
                     </Content>
                 </View>
                 <View style={{ height: 120, alignItems: 'center', marginBottom: 10 }}>
@@ -273,6 +308,7 @@ const styles = StyleSheet.create({
     },
     main: {
         backgroundColor: 'white',
+        height: 305,
 
     },
     button: {
