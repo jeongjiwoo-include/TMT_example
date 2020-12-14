@@ -3,7 +3,8 @@ import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity, TextInput 
 import { Card, CardItem, Thumbnail, Body, Left, Right, Button, Content, Icon, ListItem,CheckBox } from 'native-base';
 import Modal, { ModalContent, ModalTitle, ModalFooter, ModalButton } from 'react-native-modals';
 import {RNCamera} from 'react-native-camera-tflite';
-import SoundPlayer from 'react-native-sound-player'
+import SoundPlayer from 'react-native-sound-player';
+import outputs from './Output.json';
 
 class CircleButton extends Component{
     render(){
@@ -87,7 +88,7 @@ export default class D0_2_PullUp extends Component {
     };
 
     processOutput({data}){
-        const pullup = data[935];
+        const pullup = data[0];
         if(pullup > 0.85){
             this.setState({output:'pullup'});
         } else{
@@ -151,7 +152,7 @@ export default class D0_2_PullUp extends Component {
 
     render() {
         const modelParams = {
-            file:"pullup_model.tflite", //pull up
+            file:"model.tflite", //pull up
             inputDimX:224,
             inputDimY:224,
             outputDim:1001,
@@ -216,7 +217,7 @@ export default class D0_2_PullUp extends Component {
                             console.log(this.challengeList_tmp);
                         }
                         }>
-                        <Text style={{ color: 'white', fontSize: 19, fontStyle: 'normal', }}>챌린지 선택</Text>
+                        <Text style={{ color: 'white', fontSize: 19, fontStyle: 'normal', }}>개수 설정 / 챌린지 선택</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         disable ={this.state.touchable}
@@ -264,7 +265,8 @@ export default class D0_2_PullUp extends Component {
                                 )}
                             </ScrollView>
                             <View sytle ={{height:80}}>
-                            <Text>챌린지 없이 진행할 것이라면, 목표 운동 개수를 입력하세요.</Text>
+                            <Text>운동만 진행할 것이라면,</Text>
+                            <Text>목표 운동 개수를 입력하세요.</Text>
                             <TextInput
                             underlineColorAndroid="gray"
                             autoCapitalize="none"
