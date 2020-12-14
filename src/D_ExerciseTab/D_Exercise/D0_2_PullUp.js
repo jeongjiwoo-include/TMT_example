@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity, TextInput } from 'react-native';
 import { Card, CardItem, Thumbnail, Body, Left, Right, Button, Content, Icon, ListItem,CheckBox } from 'native-base';
 import Modal, { ModalContent, ModalTitle, ModalFooter, ModalButton } from 'react-native-modals';
 import {RNCamera} from 'react-native-camera-tflite';
+import SoundPlayer from 'react-native-sound-player'
 
 class CircleButton extends Component{
     render(){
@@ -65,6 +66,7 @@ export default class D0_2_PullUp extends Component {
             visible: false,
             output:'down',
             count : 0,
+            touchable : true,
         }
     }
     data = {
@@ -90,11 +92,15 @@ export default class D0_2_PullUp extends Component {
             this.setState({output:'pullup'});
         } else{
             if(this.state.output=='down'){
-                this.setState({count:count+1})
-                SoundPlayer.playSoundFile(`a${this.state.count %10}`,'mp3')
+                this.setState({count:this.state.count+1})
+                if(this.state.count == 0) ;
+                else SoundPlayer.playSoundFile(`a${this.state.count %10}`,'mp3')
             }    
             this.setState({output:'pullup'});
         } 
+        if(this.data.count_per_set == this.state.count){
+            this.setState({touchable:false});
+        }
     }
 
     componentDidMount() {
@@ -145,7 +151,7 @@ export default class D0_2_PullUp extends Component {
 
     render() {
         const modelParams = {
-            file:"squat_model.tflite", //pull up
+            file:"pullup_model.tflite", //pull up
             inputDimX:224,
             inputDimY:224,
             outputDim:1001,
@@ -188,7 +194,7 @@ export default class D0_2_PullUp extends Component {
                                     color: 'white',
                                     fontSize: 18,
                                     fontWeight: 'bold'
-                                }}>{this.state.count}</Text>
+                                }}>{this.state.count}/{this.data.count_per_set}</Text>
                             </RNCamera>
                         </View>
                     </Content>
@@ -196,7 +202,7 @@ export default class D0_2_PullUp extends Component {
                 <View style={{ height: 120, alignItems: 'center', marginBottom: 10 }}>
                     <TouchableOpacity
                         style={{
-                            width: 200,
+                            width: 370,
                             height: 50,
                             borderRadius: 10,
                             backgroundColor: '#272343',
@@ -213,6 +219,7 @@ export default class D0_2_PullUp extends Component {
                         <Text style={{ color: 'white', fontSize: 19, fontStyle: 'normal', }}>챌린지 선택</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
+                        disable ={this.state.touchable}
                         style={{
                             width: 370,
                             height: 50,
@@ -242,8 +249,8 @@ export default class D0_2_PullUp extends Component {
                             align="left"
                         />
                         <ModalContent style={{ backgroundColor: '#fff', paddingTop: 24, width: 200 }}>
+                        <ScrollView style={{height:80}}>
                             <Text>챌린지를 선택해주세요</Text>
-                            <ScrollView>
                                 {this.challengeList_tmp.map((obj, i) => {
                                     return (
                                         <ListItem key={i}>
@@ -256,6 +263,16 @@ export default class D0_2_PullUp extends Component {
                                 }
                                 )}
                             </ScrollView>
+                            <View sytle ={{height:80}}>
+                            <Text>챌린지 없이 진행할 것이라면, 목표 운동 개수를 입력하세요.</Text>
+                            <TextInput
+                            underlineColorAndroid="gray"
+                            autoCapitalize="none"
+                            placeholderTextColor='#e3f6f5'
+                            keyboardType="number-pad"
+                            onChangeText={(text)=>{this.data.count_per_set=text}}
+                            />
+                            </View>
                         </ModalContent>
                         <ModalFooter>
                             <ModalButton

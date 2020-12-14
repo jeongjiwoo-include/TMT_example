@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity, TextInput } from 'react-native';
 import { Card, CardItem, Thumbnail, Body, Left, Right, Button, Content, Icon, ListItem,CheckBox } from 'native-base';
 import Modal, { ModalContent, ModalTitle, ModalFooter, ModalButton } from 'react-native-modals';
 import {RNCamera} from 'react-native-camera-tflite';
@@ -66,6 +66,7 @@ export default class D0_1_Squat extends Component {
             visible: false,
             output:'stand',
             count : 0,
+            touchable : true,
         }
     }
     data = {
@@ -87,15 +88,21 @@ export default class D0_1_Squat extends Component {
 
     processOutput({data}){
         const squat = data[935];
+        const is_squat = '';
         if(squat > 0.85 ){
             this.setState({output:'squat'});
         } else {
             if(this.state.output=='squat'){
-                this.setState({count:count+1})
-                SoundPlayer.playSoundFile(`a${this.state.count %10}`,'mp3')
+                this.setState({count:this.state.count+1})
+                if(this.state.count == 0) ;
+                else SoundPlayer.playSoundFile(`a${this.state.count %10}`,'mp3')
             }    
             this.setState({output:'stand'});
         }        
+
+        if(this.data.count_per_set == this.state.count){
+            this.setState({touchable:false});
+        }
     }
 
     componentDidMount() {
@@ -188,13 +195,14 @@ export default class D0_1_Squat extends Component {
                                     color: 'white',
                                     fontSize: 18,
                                     fontWeight: 'bold'
-                                }}>{this.state.count}개</Text>
+                                }}>{this.state.count}/{this.data.count_per_set}</Text>
                             </RNCamera>
                         </View>
                     </Content>
                 </View>
                 <View style={{ height: 120, alignItems: 'center', marginBottom: 10 }}>
                     <TouchableOpacity
+                        disabled={this.state.touchable}
                         style={{
                             width: 370,
                             height: 50,
@@ -210,7 +218,7 @@ export default class D0_1_Squat extends Component {
                             console.log(this.challengeList_tmp);
                         }
                         }>
-                        <Text style={{ color: 'white', fontSize: 19, fontStyle: 'normal', }}>챌린지 선택</Text>
+                        <Text style={{ color: 'white', fontSize: 19, fontStyle: 'normal', }}>개수 설정 / 챌린지 선택</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={{
@@ -241,9 +249,10 @@ export default class D0_1_Squat extends Component {
                             title="챌린지 선택"
                             align="left"
                         />
-                        <ModalContent style={{ backgroundColor: '#fff', paddingTop: 24, width: 200 }}>
+                        <ModalContent style={{ backgroundColor: '#fff', paddingTop: 24, width: 200, height:370 }}>
+                            
+                            <ScrollView style={{height:80}}>
                             <Text>챌린지를 선택해주세요</Text>
-                            <ScrollView>
                                 {this.challengeList_tmp.map((obj, i) => {
                                     return (
                                         <ListItem key={i}>
@@ -256,7 +265,18 @@ export default class D0_1_Squat extends Component {
                                 }
                                 )}
                             </ScrollView>
+                            <View sytle ={{height:80}}>
+                            <Text>챌린지 없이 진행할 것이라면, 목표 운동 개수를 입력하세요.</Text>
+                            <TextInput
+                            underlineColorAndroid="gray"
+                            autoCapitalize="none"
+                            placeholderTextColor='#e3f6f5'
+                            keyboardType="number-pad"
+                            onChangeText={(text)=>{this.data.count_per_set=text}}
+                            />
+                            </View>
                         </ModalContent>
+                        
                         <ModalFooter>
                             <ModalButton
                                 text="확인"
