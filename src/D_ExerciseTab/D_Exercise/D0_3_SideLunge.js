@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Card, CardItem, Thumbnail, Body, Left, Right, Button, Content, Icon, ListItem,CheckBox } from 'native-base';
 import Modal, { ModalContent, ModalTitle, ModalFooter, ModalButton } from 'react-native-modals';
+import {RNCamera} from 'react-native-camera-tflite';
 
 class CircleButton extends Component{
     render(){
@@ -62,6 +63,8 @@ export default class D0_3_SideLunge extends Component {
         super(props);
         this.state = {
             visible: false,
+            output:'up',
+            count : 0,
         }
     }
     data = {
@@ -80,6 +83,20 @@ export default class D0_3_SideLunge extends Component {
         name : '',
         checked: false,
     };
+
+    processOutput({data}){
+        const sidelunge = data[935];
+        if(sidelunge > 0.85){
+            this.setState({output:'down'});
+        } else{
+            if(this.state.output=='down'){
+                this.setState({count:count+0.5})
+                SoundPlayer.playSoundFile(`a${this.state.count %10}`,'mp3')
+            }    
+            this.setState({output:'up'});
+        } 
+        
+    }
 
     componentDidMount() {
         const Data = this.props.navigation.getParam('data');
@@ -128,6 +145,13 @@ export default class D0_3_SideLunge extends Component {
 
 
     render() {
+        const modelParams = {
+            file:"sidelunge_model.tflite",
+            inputDimX:224,
+            inputDimY:224,
+            outputDim:1001,
+            freqms: 0
+        };
 
         return (
             <View style={styles.rootcontainer}>
@@ -142,7 +166,32 @@ export default class D0_3_SideLunge extends Component {
                     </View>
                     <Title />
                     <Content>
-                        <MainCom />
+                    <View style={styles.main}>
+                            <RNCamera ref={ref => { this.camera = ref; }}
+                                style={{
+                                    flex: 1,
+                                    justifyContent: 'center',
+                                    alignItems: 'center'
+                                }}
+                                type={RNCamera.Constants.Type.back}
+                                flashMode={RNCamera.Constants.FlashMode.on}
+                                permissionDialogTitle={'카메라 접근을 허용 해주세요.'}
+                                permissionDialogMessage={'휴대폰의 카메라 접근을 허용해야합니다.'}
+                                onModelProcessed={data => this.processOutput(data)}
+                                modelParams={modelParams}
+                            >
+                                <Text style={{
+                                    color: 'white',
+                                    fontSize: 18,
+                                    fontWeight: 'bold'
+                                }}>{this.state.output}</Text>
+                                <Text style={{
+                                    color: 'white',
+                                    fontSize: 18,
+                                    fontWeight: 'bold'
+                                }}>{this.state.count}</Text>
+                            </RNCamera>
+                        </View>
                     </Content>
                 </View>
                 <View style={{ height: 120, alignItems: 'center', marginBottom: 10 }}>
@@ -154,7 +203,7 @@ export default class D0_3_SideLunge extends Component {
                             backgroundColor: '#272343',
                             justifyContent: 'center',
                             alignItems: 'flex-end',
-                            marginBottom: 20,
+                            marginTop: 10,
                             alignItems: 'center'
                         }}
                         onPress={() => {
@@ -172,7 +221,7 @@ export default class D0_3_SideLunge extends Component {
                             backgroundColor: '#272343',
                             justifyContent: 'center',
                             alignItems: 'flex-end',
-                            marginBottom: 20,
+                            marginTop: 10,
                             alignItems: 'center'
                         }}
                         onPress={() => {
@@ -273,6 +322,7 @@ const styles = StyleSheet.create({
     },
     main :{
         backgroundColor: 'white',
+        height: 330,
         
     },
     button :{

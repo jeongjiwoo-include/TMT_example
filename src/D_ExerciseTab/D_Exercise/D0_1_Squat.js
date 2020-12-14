@@ -3,6 +3,7 @@ import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity } from 'rea
 import { Card, CardItem, Thumbnail, Body, Left, Right, Button, Content, Icon, ListItem,CheckBox } from 'native-base';
 import Modal, { ModalContent, ModalTitle, ModalFooter, ModalButton } from 'react-native-modals';
 import {RNCamera} from 'react-native-camera-tflite';
+import SoundPlayer from 'react-native-sound-player'
 
 class CircleButton extends Component {
     render() {
@@ -63,7 +64,8 @@ export default class D0_1_Squat extends Component {
         super(props);
         this.state = {
             visible: false,
-            output:'',
+            output:'stand',
+            count : 0,
         }
     }
     data = {
@@ -85,9 +87,15 @@ export default class D0_1_Squat extends Component {
 
     processOutput({data}){
         const squat = data[935];
-        const is_squat = squat > 0.2 ? "squat" : "not squat";
-        const output =`${is_squat}`;
-        this.setState({output:output});
+        if(squat > 0.85 ){
+            this.setState({output:'squat'});
+        } else {
+            if(this.state.output=='squat'){
+                this.setState({count:count+1})
+                SoundPlayer.playSoundFile(`a${this.state.count %10}`,'mp3')
+            }    
+            this.setState({output:'stand'});
+        }        
     }
 
     componentDidMount() {
@@ -176,6 +184,11 @@ export default class D0_1_Squat extends Component {
                                     fontSize: 18,
                                     fontWeight: 'bold'
                                 }}>{this.state.output}</Text>
+                                <Text style={{
+                                    color: 'white',
+                                    fontSize: 18,
+                                    fontWeight: 'bold'
+                                }}>{this.state.count}개</Text>
                             </RNCamera>
                         </View>
                     </Content>
@@ -183,13 +196,13 @@ export default class D0_1_Squat extends Component {
                 <View style={{ height: 120, alignItems: 'center', marginBottom: 10 }}>
                     <TouchableOpacity
                         style={{
-                            width: 200,
+                            width: 370,
                             height: 50,
                             borderRadius: 10,
                             backgroundColor: '#272343',
                             justifyContent: 'center',
                             alignItems: 'flex-end',
-                            marginBottom: 20,
+                            marginTop: 10,
                             alignItems: 'center'
                         }}
                         onPress={() => {
@@ -207,7 +220,7 @@ export default class D0_1_Squat extends Component {
                             backgroundColor: '#272343',
                             justifyContent: 'center',
                             alignItems: 'flex-end',
-                            marginBottom: 20,
+                            marginTop: 10,
                             alignItems: 'center'
                         }}
                         onPress={() => {
@@ -308,7 +321,7 @@ const styles = StyleSheet.create({
     },
     main: {
         backgroundColor: 'white',
-        height: 305,
+        height: 330,
 
     },
     button: {
