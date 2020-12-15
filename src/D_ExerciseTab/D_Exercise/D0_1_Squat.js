@@ -95,7 +95,9 @@ export default class D0_1_Squat extends Component {
             this.setState({output:'squat'});
         } else if(stand > 0.85 && squat <0.5){
             if(this.state.output=='squat'){
-                this.setState({count:this.state.count+1})
+                if(this.state.count < this.data.count_per_set){this.setState({count:this.state.count+1});}
+                else if (this.state.count >= this.data.count_per_set) ;
+                
                 if(this.state.count == 0) ;
                 else SoundPlayer.playSoundFile(`a${this.state.count %10}`,'mp3')
             }    

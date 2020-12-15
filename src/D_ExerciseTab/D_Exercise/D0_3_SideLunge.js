@@ -114,7 +114,8 @@ processOutput({data}){
             this.setState({output:'down'});
         } else if(stand > 0.85 && sidelunge < 0.5){
             if(this.state.output=='down'){
-                this.setState({count:this.state.count+0.5})
+                if(this.state.count < this.data.count_per_set){this.setState({count:this.state.count+1});}
+                else if (this.state.count >= this.data.count_per_set) ;
                 if(this.state.count == 0) ;
                 else SoundPlayer.playSoundFile(`a${this.state.count %10}`,'mp3')
             }    

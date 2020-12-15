@@ -1,4 +1,4 @@
-const url = 'http://118.37.191.82:3000';
+const url = 'https://savemeht.ml/';
 
 exports.GET = async (route) => {
   try {
