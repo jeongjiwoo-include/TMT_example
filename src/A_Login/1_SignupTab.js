@@ -7,7 +7,15 @@ import * as Request from '../request';
 var tmp = new Date();
 
 export default class SignupTab extends Component {
-    state = {
+    constructor(props) {
+        super(props);
+        this.state = {
+            auth_code : '',
+            disable: true,
+        }
+    }
+
+    data = {
         id: '',
         pw: '',
         re_pw: '',
@@ -26,56 +34,55 @@ export default class SignupTab extends Component {
         domain: '',
     }
     phone_num = {
-        first : '',
+        first: '',
         second: '',
     }
 
     handleID = (text) => {
-        this.setState({ id: text });
+        this.data.id = text;
     }
     handlePW = (text) => {
-        this.setState({ pw: text })
+        this.data.pw = text;
     }
     handleRE_PW = (text) => {
-        this.setState({ re_pw: text })
+        this.data.re_pw = text
     }
     handleNAME = (text) => {
-        this.setState({ name: text })
+        this.data.name = text
     }
     handleEMAIL = (address, domain) => {
         var email_address = `${address}@${domain}`
-        this.setState({ email: email_address })
+        this.data.email = email_address
     }
     handlePHONE = (first, second) => {
         var phone = `010-${first}-${second}`
-        this.setState({ phone_number: phone })
+        this.data.phone_number = phone
     }
-    handleBIRTH = (date) => { 
+    handleBIRTH = (date) => {
         let res = ''
-        let year = date.getFullYear(); console.log(`year : ${year}`);
-        let month = date.getMonth()+1; console.log(`month : ${month}`);
+        let year = date.getFullYear();
+        let month = date.getMonth() + 1;
         if (month < 10) { month = `0${month}` }
-        let day = date.getDate(); console.log(`day : ${day}`);
+        let day = date.getDate();
         if (day < 10) { day = `0${day}` }
         res = `${year}-${month}-${day}`;
 
-        this.setState({ birth_date: res });
-        console.log(this.state.birth_date);
+        this.data.birth_date = res;
     }
     handleHEIGHT = (text) => {
-        this.setState({ height: text })
+        this.data.height = text
     }
     handleWEIGHT = (text) => {
-        this.setState({ weight: text })
+        this.data.weight = text
     }
     /*handlePUB=(text)=>{
         this.setState({public:text})
     }*/
     signCheck = (id, pw, re_pw, name, email, phone_number, age, height, weight) => {
-        if (pw != re_pw) { alert('비밀번호 확인이 잘못 되었습니다. 재확인 하세요.');throw new Error('msg:Wrong password_re') };
-        console.log(this.state);
+        if (pw != re_pw) { alert('비밀번호 확인이 잘못 되었습니다. 재확인 하세요.'); throw new Error('msg:Wrong password_re') };
+
     }
-        
+
     render() {
         return (
             <View style={styles.rootcontainer}>
@@ -122,50 +129,101 @@ export default class SignupTab extends Component {
                         >
                         </TextInput>
                         <Text style={{ alignItems: 'flex-start' }}>이메일</Text>
-                        <View style={{flexDirection:'row'}}>
-                        <TextInput
-                            style={styles.input_row}
-                            underlineColorAndroid="transparent"
-                            autoCapitalize="none"
-                            placeholderTextColor='#e3f6f5'
-                            onChangeText={(text)=>this.email.address=text}
-                        >
-                        </TextInput>
-                        <Text style={{fontSize:28 }}>@</Text>
-                        <TextInput
-                            style={styles.input_row}
-                            underlineColorAndroid="transparent"
-                            autoCapitalize="none"
-                            placeholderTextColor='#e3f6f5'
-                            onChangeText={(text)=>{this.email.domain=text; this.handleEMAIL(this.email.address, this.email.domain);}}
-                        >
-                        </TextInput>
+                        <View style={{ flexDirection: 'row' }}>
+                            <TextInput
+                                style={styles.input_row}
+                                underlineColorAndroid="transparent"
+                                autoCapitalize="none"
+                                placeholderTextColor='#e3f6f5'
+                                onChangeText={(text) => this.email.address = text}
+                            >
+                            </TextInput>
+                            <Text style={{ fontSize: 28 }}>@</Text>
+                            <TextInput
+                                style={styles.input_row}
+                                underlineColorAndroid="transparent"
+                                autoCapitalize="none"
+                                placeholderTextColor='#e3f6f5'
+                                onChangeText={(text) => { this.email.domain = text; this.handleEMAIL(this.email.address, this.email.domain); }}
+                            >
+                            </TextInput>
                         </View>
-                        <Text style={{ alignItems: 'flex-start'}}>휴대전화번호</Text>
-                        <View style={{flexDirection:'row'}}>
-                            <Text style={{fontSize:28 }}>010  -  </Text>
-                        <TextInput
-                            style={styles.input_row_phone}
-                            underlineColorAndroid="transparent"
-                            autoCapitalize="none"
-                            placeholderTextColor='#e3f6f5'
-                            keyboardType="number-pad"
-                            onChangeText={(text)=>{this.phone_num.first=text}}
-                        >
-                        </TextInput>
-                        <Text style={{fontSize:28 }}>  -  </Text>
-                        <TextInput
-                            style={styles.input_row_phone}
-                            underlineColorAndroid="transparent"
-                            autoCapitalize="none"
-                            placeholderTextColor='#e3f6f5'
-                            keyboardType="number-pad"
-                            onChangeText={(text)=>{this.phone_num.second=text; this.handlePHONE(this.phone_num.first, this.phone_num.second);}}
-                        >
-                        </TextInput>
+                        <Text style={{ alignItems: 'flex-start' }}>휴대전화번호</Text>
+                        <View style={{ flexDirection: 'row', justifyContent:'space-between',alignItems:'stretch' }}>
+                            <Text style={{ fontSize: 28 }}>010 -</Text>
+                            <TextInput
+                                style={styles.input_row_phone}
+                                underlineColorAndroid="transparent"
+                                autoCapitalize="none"
+                                placeholderTextColor='#e3f6f5'
+                                keyboardType="number-pad"
+                                onChangeText={(text) => { this.phone_num.first = text }}
+                            >
+                            </TextInput>
+                            <Text style={{ fontSize: 28 }}>-</Text>
+                            <TextInput
+                                style={styles.input_row_phone}
+                                underlineColorAndroid="transparent"
+                                autoCapitalize="none"
+                                placeholderTextColor='#e3f6f5'
+                                keyboardType="number-pad"
+                                onChangeText={(text) => { this.phone_num.second = text; this.handlePHONE(this.phone_num.first, this.phone_num.second); }}
+                            >
+                            </TextInput>
+                            <TouchableOpacity 
+                            style={{
+                                width: 50,
+                                height: 40,
+                                borderRadius: 10,
+                                backgroundColor: '#272343',
+                                justifyContent: 'center',
+                                alignItems: 'flex-end',
+                                marginBottom: 20,
+                                alignItems: 'center'
+                            }}
+                            onPress={async () => {
+                                await Request.GET(`join/auth/010${this.phone_num.first}${this.phone_num.second}`).then(alert('인증번호가 전송되었습니다.'))}}>
+                                <Text style={{ color: 'white', fontSize: 19, fontStyle: 'normal', }}>인증</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <Text>인증번호</Text>
+                        <View style={{ flexDirection: 'row',justifyContent:'space-between',alignItems:'stretch' }}>
+                            <TextInput
+                                style={styles.input_row}
+                                underlineColorAndroid="transparent"
+                                autoCapitalize="none"
+                                placeholderTextColor='#e3f6f5'
+                                keyboardType="number-pad"
+                                onChangeText={(text) => { var code = text; this.setState({auth_code:code}); console.log(this.state.auth_code) }}
+                            >
+                            </TextInput>
+                            <TouchableOpacity 
+                            style={{
+                                width: 100,
+                                height: 40,
+                                borderRadius: 10,
+                                backgroundColor: '#272343',
+                                justifyContent: 'center',
+                                alignItems: 'flex-end',
+                                marginBottom: 20,
+                                alignItems: 'center'
+                            }}
+                            onPress={async () => {
+                                await Request.GET(`join/auth/010${this.phone_num.first}${this.phone_num.second}/${this.state.auth_code}`);
+                                try {
+                                    await Request.GET(`join/authCheck/010${this.phone_num.first}${this.phone_num.second}/${this.state.auth_code}`).then((x)=>{console.log(x.status)});
+                                    alert('인증되었습니다.');
+                                    this.setState({disable:false});
+                                }catch(e){
+                                    alert('인증코드가 잘못되었습니다. 재확인 하세요.')
+                                    this.setState({disable:true});
+                                }
+                                }}>
+                                <Text style={{ color: 'white', fontSize: 19, fontStyle: 'normal', }}>인증하기</Text>
+                            </TouchableOpacity>
                         </View>
                         <Text style={{ alignItems: 'flex-start' }}>생년월일</Text>
-                        <DatePicker date={tmp} onDateChange={(date) => { console.log(date); tmp = date; console.log(tmp);this.handleBIRTH(tmp) }} mode={'date'} />
+                        <DatePicker date={tmp} onDateChange={(date) => { tmp = date; console.log(tmp); this.handleBIRTH(tmp) }} mode={'date'} />
                         <Text style={{ alignItems: 'flex-start' }}>키 (단위:cm)</Text>
                         <TextInput
                             style={styles.input}
@@ -188,23 +246,12 @@ export default class SignupTab extends Component {
                         </TextInput>
                     </ScrollView>
                     <View style={{ height: 50, alignItems: 'flex-end' }}>
-                        <TouchableOpacity style={styles.button} onPress={async () => {
+                        <TouchableOpacity disabled={this.state.disable} style={styles.button} onPress={async () => {
                             try {
                                 this.signCheck(
-                                    this.state.id, this.state.pw, this.state.re_pw, this.state.name, this.state.email, this.state.phone_number, this.state.age, this.state.height, this.state.weight
+                                    this.data.id, this.data.pw, this.data.re_pw, this.data.name, this.data.email, this.data.phone_number, this.data.age, this.data.height, this.data.weight
                                 );
-                                /*join(this.state)
-                                .then((json)=>{
-                                    if(json.state==0){
-                                        alert('중복된 ID입니다.\n다른 ID를 입력하세요.');
-                                    }
-                                    else{
-                                        
-                                        (this.props.navigation.navigate('A0_LoginTab'));
-                                    }
-                                })
-                                */
-                                await Request.POST('join', this.state);
+                                await Request.POST('join', this.data);
                                 this.props.navigation.navigate('A0_LoginTab');
                             } catch (e) {
                                 alert('회원가입 실패.')
@@ -277,7 +324,7 @@ const styles = StyleSheet.create({
     },
     input_row_phone: {
         alignItems: 'stretch',
-        width: 115,
+        width: 85,
         height: 40,
         borderRadius: 10,
         backgroundColor: '#bae8e8',

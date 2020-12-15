@@ -158,21 +158,21 @@ export default class ChallengeTab extends Component {
                                         <Text style={{ borderStyle: 'solid' }}>(개수  *  세트)</Text>
                                         <Label style={{ paddingTop: 24 }}>스쿼트</Label>
                                         <View style={{ flexDirection: 'row' }}>
-                                            <Input style={{ borderBottomWidth: 0.5, borderBottomColor: 'black', height: 12, marginTop: 10 }} value={this.state.c_exerciseNum1} onChangeText={(val) => { this.setState({ c_exerciseNum1: val }); }} />
+                                            <Input style={{ borderBottomWidth: 0.5, borderBottomColor: 'black', height: 12, marginTop: 10 }} keyboardType="number-pad" value={this.state.c_exerciseNum1} onChangeText={(val) => { this.setState({ c_exerciseNum1: val }); }} />
                                             <Text>  *  </Text>
-                                            <Input style={{ borderBottomWidth: 0.5, borderBottomColor: 'black', height: 12, marginTop: 10 }} value={this.state.c_exerciseNum1Set} onChangeText={(val) => { this.setState({ c_exerciseNum1Set: val }); }} />
+                                            <Input style={{ borderBottomWidth: 0.5, borderBottomColor: 'black', height: 12, marginTop: 10 }} keyboardType="number-pad" value={this.state.c_exerciseNum1Set} onChangeText={(val) => { this.setState({ c_exerciseNum1Set: val }); }} />
                                         </View>
                                         <Label style={{ paddingTop: 24 }}>풀업</Label>
                                         <View style={{ flexDirection: 'row' }}>
-                                            <Input style={{ borderBottomWidth: 0.5, borderBottomColor: 'black', height: 12, marginTop: 10 }} value={this.state.c_exerciseNum2} onChangeText={(val) => { this.setState({ c_exerciseNum2: val }); }} />
+                                            <Input style={{ borderBottomWidth: 0.5, borderBottomColor: 'black', height: 12, marginTop: 10 }} keyboardType="number-pad" value={this.state.c_exerciseNum2} onChangeText={(val) => { this.setState({ c_exerciseNum2: val }); }} />
                                             <Text>  *  </Text>
-                                            <Input style={{ borderBottomWidth: 0.5, borderBottomColor: 'black', height: 12, marginTop: 10 }} value={this.state.c_exerciseNum2} value={this.state.c_exerciseNum2Set} onChangeText={(val) => { this.setState({ c_exerciseNum2Set: val }); }} />
+                                            <Input style={{ borderBottomWidth: 0.5, borderBottomColor: 'black', height: 12, marginTop: 10 }} keyboardType="number-pad" value={this.state.c_exerciseNum2} value={this.state.c_exerciseNum2Set} onChangeText={(val) => { this.setState({ c_exerciseNum2Set: val }); }} />
                                         </View>
                                         <Label style={{ paddingTop: 24 }}>사이드 런지</Label>
                                         <View style={{ flexDirection: 'row' }}>
-                                            <Input style={{ borderBottomWidth: 0.5, borderBottomColor: 'black', height: 12, marginTop: 10 }} value={this.state.c_exerciseNum3} onChangeText={(val) => { this.setState({ c_exerciseNum3: val }); }} />
+                                            <Input style={{ borderBottomWidth: 0.5, borderBottomColor: 'black', height: 12, marginTop: 10 }} keyboardType="number-pad" value={this.state.c_exerciseNum3} onChangeText={(val) => { this.setState({ c_exerciseNum3: val }); }} />
                                             <Text>  *  </Text>
-                                            <Input style={{ borderBottomWidth: 0.5, borderBottomColor: 'black', height: 12, marginTop: 10 }} value={this.state.c_exerciseNum3} value={this.state.c_exerciseNum3Set} onChangeText={(val) => { this.setState({ c_exerciseNum3Set: val }); }} />
+                                            <Input style={{ borderBottomWidth: 0.5, borderBottomColor: 'black', height: 12, marginTop: 10 }} keyboardType="number-pad" value={this.state.c_exerciseNum3} value={this.state.c_exerciseNum3Set} onChangeText={(val) => { this.setState({ c_exerciseNum3Set: val }); }} />
                                         </View>
                                     </ModalContent>
                                     <ModalFooter>

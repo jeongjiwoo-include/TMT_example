@@ -86,12 +86,33 @@ export default class D0_3_SideLunge extends Component {
         name : '',
         checked: false,
     };
-
+/* 
+processOutput({data}){
+                const stand = data[0];
+                const sidelunge = data[2];
+                if(sidelunge > 0.5 && stand <0.5){
+                    this.setState({output:'down'});
+                } else if(stand > 0.5 && sidelunge <0.5){
+                    if(this.state.output=='down'){
+                        this.setState({count:this.state.count+1})
+                        if(this.state.count == 0) ;
+                        else SoundPlayer.playSoundFile(`a${this.state.count %10}`,'mp3')
+                    }    
+                    this.setState({output:'up'});
+                } 
+        
+                if(this.data.count_per_set == this.state.count){
+                    this.setState({touchable:false});
+                }
+                
+            }
+*/
     processOutput({data}){
-        const sidelunge = data[1];
-        if(sidelunge > 0.85){
+        const sidelunge = data[3];
+        const stand = data[0];
+        if(sidelunge > 0.85 && stand < 0.5){
             this.setState({output:'down'});
-        } else{
+        } else if(stand > 0.85 && sidelunge < 0.5){
             if(this.state.output=='down'){
                 this.setState({count:this.state.count+0.5})
                 if(this.state.count == 0) ;
@@ -140,6 +161,7 @@ export default class D0_3_SideLunge extends Component {
             this.challengeData.cID=x.challenge.cID;
             this.challengeData.name=x.challenge.name;
             this.challengeData.checked=false;
+            this.challengeData.count_per_set=x.challenge.count_per_set;
             this.challengeList_tmp.push(this.challengeData);
         })
         
@@ -155,7 +177,7 @@ export default class D0_3_SideLunge extends Component {
 
     render() {
         const modelParams = {
-            file:"model.tflite",
+            file:"sidelunge_model.tflite",
             inputDimX:224,
             inputDimY:224,
             outputDim:1001,
@@ -186,7 +208,7 @@ export default class D0_3_SideLunge extends Component {
                                 flashMode={RNCamera.Constants.FlashMode.on}
                                 permissionDialogTitle={'카메라 접근을 허용 해주세요.'}
                                 permissionDialogMessage={'휴대폰의 카메라 접근을 허용해야합니다.'}
-                                onModelProcessed={data => this.processOutput(data)}
+                                onModelProcessed={data => {setTimeout(()=>this.processOutput(data)),1000}}
                                 modelParams={modelParams}
                             >
                                 <Text style={{
@@ -285,7 +307,8 @@ export default class D0_3_SideLunge extends Component {
                                 onPress={() => {
                                     this.challengeList_tmp.map((obj)=>{
                                         if(obj.friendCheck==true)
-                                        {this.data.eID=obj.cID;}
+                                        {this.data.eID=obj.cID;
+                                            this.data.count_per_set=obj.count_per_set;}
                                     }
                                     )
                                     

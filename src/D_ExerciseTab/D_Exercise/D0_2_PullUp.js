@@ -88,7 +88,7 @@ export default class D0_2_PullUp extends Component {
     };
 
     processOutput({data}){
-        const pullup = data[0];
+        const pullup = data[2];
         if(pullup > 0.85){
             this.setState({output:'pullup'});
         } else{
@@ -138,6 +138,7 @@ export default class D0_2_PullUp extends Component {
             this.challengeData.cID=x.challenge.cID;
             this.challengeData.name=x.challenge.name;
             this.challengeData.checked=false;
+            this.challengeData.count_per_set=x.challenge.count_per_set;
             this.challengeList_tmp.push(this.challengeData);
         })
         
@@ -152,7 +153,7 @@ export default class D0_2_PullUp extends Component {
 
     render() {
         const modelParams = {
-            file:"model.tflite", //pull up
+            file:"pullup_model.tflite", //pull up
             inputDimX:224,
             inputDimY:224,
             outputDim:1001,
@@ -282,7 +283,8 @@ export default class D0_2_PullUp extends Component {
                                 onPress={() => {
                                     this.challengeList_tmp.map((obj)=>{
                                         if(obj.friendCheck==true)
-                                        {this.data.eID=obj.cID;}
+                                        {this.data.eID=obj.cID;
+                                            this.data.count_per_set=obj.count_per_set;}
                                     }
                                     )
                                     

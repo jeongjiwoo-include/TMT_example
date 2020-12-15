@@ -84,15 +84,16 @@ export default class D0_1_Squat extends Component {
     challengeData = {
         cID:0,
         name : '',
+        count_per_set : 0,
         checked: false,
     };
 
     processOutput({data}){
-        const squat = data[2];
-        const is_squat = '';
-        if(squat > 0.85 ){
+        const stand = data[0];
+        const squat = data[1];
+        if(squat > 0.85 && stand <0.5){
             this.setState({output:'squat'});
-        } else {
+        } else if(stand > 0.85 && squat <0.5){
             if(this.state.output=='squat'){
                 this.setState({count:this.state.count+1})
                 if(this.state.count == 0) ;
@@ -139,6 +140,7 @@ export default class D0_1_Squat extends Component {
         this.challengeList.map((x)=>{
             this.challengeData.cID=x.challenge.cID;
             this.challengeData.name=x.challenge.name;
+            this.challengeData.count_per_set=x.challenge.count_per_set;
             this.challengeData.checked=false;
             this.challengeList_tmp.push(this.challengeData);
         })
@@ -154,7 +156,7 @@ export default class D0_1_Squat extends Component {
 
     render() {
         const modelParams = {
-            file:"model.tflite",
+            file:"squat_model.tflite",
             inputDimX:224,
             inputDimY:224,
             outputDim:1001,
@@ -184,7 +186,7 @@ export default class D0_1_Squat extends Component {
                                 flashMode={RNCamera.Constants.FlashMode.on}
                                 permissionDialogTitle={'카메라 접근을 허용 해주세요.'}
                                 permissionDialogMessage={'휴대폰의 카메라 접근을 허용해야합니다.'}
-                                onModelProcessed={data => this.processOutput(data)}
+                                onModelProcessed={data => {setTimeout(()=>{this.processOutput(data)},1000)}}
                                 modelParams={modelParams}
                             >
                                 <Text style={{
@@ -222,6 +224,7 @@ export default class D0_1_Squat extends Component {
                         <Text style={{ color: 'white', fontSize: 19, fontStyle: 'normal', }}>개수 설정 / 챌린지 선택</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
+                        disabled={this.state.touchable}
                         style={{
                             width: 370,
                             height: 50,
@@ -285,7 +288,11 @@ export default class D0_1_Squat extends Component {
                                 onPress={() => {
                                     this.challengeList_tmp.map((obj)=>{
                                         if(obj.friendCheck==true)
-                                        {this.data.eID=obj.cID;}
+                                        {
+                                            this.data.eID=obj.cID;
+                                            this.data.count_per_set=obj.count_per_set;
+                                        }
+
                                     }
                                     )
                                     
